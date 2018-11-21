@@ -25,7 +25,18 @@ enum Ingredients {
   carrots = "carrots",
   blackPepper = "black pepper",
   unsaltedButter = "unsalted butter",
-  flatLeafParsley = "flat leaf parsley"
+  flatLeafParsley = "flat leaf parsley",
+  freshGreenBeans = "fresh green beans",
+  extraVirginOliveOil = "extra virgin olive oil",
+  almonds = "almonds",
+  garlic = "garlic",
+  skimMilk = "skim milk",
+  creamCheese = "cream cheese",
+  sweetenedCondensedMilk = "sweetened condensed milk",
+  vanillaPuddingMix = "vanilla pudding mix",
+  whippedTopping = "whipped topping",
+  banana = "banana",
+  vanillaWafers = "vanilla wafers"
 }
 
 export const emptyIngredient: Ingredient = {
@@ -245,20 +256,113 @@ const sauteedCarrots: Recipe = {
   ]
 };
 
+const greenBeansWithAlmonds: Recipe = {
+  title: "Green Beans with Almonds",
+  cookTime: 0.25,
+  mealType: MealTypes.side,
+  ingredients: [
+    {
+      name: Ingredients.freshGreenBeans,
+      amount: 1.5,
+      measurementType: MeasurementTypes.pound,
+      extraInformation: "trimmed"
+    },
+    {
+      name: Ingredients.extraVirginOliveOil,
+      amount: 1,
+      measurementType: MeasurementTypes.tbsp
+    },
+    {
+      name: Ingredients.butter,
+      amount: 1,
+      measurementType: MeasurementTypes.tbsp
+    },
+    {
+      name: Ingredients.almonds,
+      amount: 1,
+      measurementType: MeasurementTypes.unit
+    },
+    {
+      name: Ingredients.garlic,
+      amount: 3,
+      measurementType: MeasurementTypes.unit
+    }
+  ],
+  instructions: [
+    "Cook green beans 5 minutes in 1-inch boiling water, covered. Drain beans and return pan to heat.",
+    "Add oil and butter pat to the pan. Toss beans in oil and melted butter. Season beans with a little salt and transfer to a serving plate.",
+    "Garnish green beans with toasted slivered or sliced almonds."
+  ]
+};
+
+const bananaPudding: Recipe = {
+  title: "Banana Pudding",
+  cookTime: 3.5,
+  mealType: MealTypes.dessert,
+  ingredients: [
+    {
+      name: Ingredients.creamCheese,
+      amount: 8,
+      measurementType: MeasurementTypes.oz,
+      extraInformation: "room temperature"
+    },
+    {
+      name: Ingredients.sweetenedCondensedMilk,
+      amount: 14,
+      measurementType: MeasurementTypes.oz
+    },
+    {
+      name: Ingredients.vanillaPuddingMix,
+      amount: 5,
+      measurementType: MeasurementTypes.oz
+    },
+    {
+      name: Ingredients.skimMilk,
+      amount: 3,
+      measurementType: MeasurementTypes.cup,
+      extraInformation: "ice cold"
+    },
+    {
+      name: Ingredients.vanillaExtract,
+      amount: 1,
+      measurementType: MeasurementTypes.tsp
+    },
+    {
+      name: Ingredients.whippedTopping,
+      amount: 8,
+      measurementType: MeasurementTypes.oz
+    },
+    {
+      name: Ingredients.banana,
+      amount: 4,
+      measurementType: MeasurementTypes.unit
+    },
+    {
+      name: Ingredients.vanillaWafers,
+      amount: 12,
+      measurementType: MeasurementTypes.oz
+    }
+  ],
+  instructions: [
+    "In a large bowl, beat cream cheese until fluffy. Beat in condensed milk, pudding mix, cold milk and vanilla until smooth. Fold in 1/2 of the whipped topping.",
+    "Line the bottom of a 9x13 inch dish with vanilla wafers. Arrange sliced bananas evenly over wafers. Spread with pudding mixture. Top with remaining whipped topping. Chill."
+  ]
+};
+
 /*
 https://www.allrecipes.com/recipe/21261/yummy-sweet-potato-casserole/
 https://www.foodnetwork.com/recipes/food-network-kitchen/perfect-cranberry-sauce-recipe-2104277
 https://www.tasteofhome.com/recipes/cranberry-apple-crisp/
 https://www.foodnetwork.com/recipes/ina-garten/sauteed-carrots-recipe-1916159
+https://www.foodnetwork.com/recipes/rachael-ray/green-beans-with-toasted-almonds-recipe-1940021
+https://www.allrecipes.com/recipe/21398/banana-pudding-iv/?internalSource=hub%20recipe&referringId=977&referringContentType=Recipe%20Hub&clickId=cardslot%2016
 */
 
 /*
 turkey
 gravy
 rolls
-green beans
 peas or corn dish
-dessert
 mashed potatoes
 salad
 serving dishes?
@@ -268,7 +372,9 @@ export const recipes: Recipe[] = [
   sweetPotatoCasserole,
   cranberrySauce,
   cranberryAppleCrisp,
-  sauteedCarrots
+  sauteedCarrots,
+  greenBeansWithAlmonds,
+  bananaPudding
 ];
 
 export const ingredientOptions: string[] = [
