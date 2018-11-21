@@ -1,6 +1,8 @@
 import React, { CSSProperties } from "react";
 import Add from "../../assets/add";
 import Close from "../../assets/close";
+import EmptyCheckbox from "../../assets/emptyCheckbox";
+import FilledCheckbox from "../../assets/filledCheckbox";
 import ListMenu from "../../assets/listMenu";
 import IconName from "./iconNames";
 
@@ -29,6 +31,10 @@ const Icon: React.SFC<IconHelperProps> = ({
           return <ListMenu size={size} fill={fill} />;
         case "add":
           return <Add size={size} fill={fill} />;
+        case "empty-checkbox":
+          return <EmptyCheckbox size={size} fill={fill} />;
+        case "filled-checkbox":
+          return <FilledCheckbox size={size} fill={fill} />;
       }
     })()}
   </div>

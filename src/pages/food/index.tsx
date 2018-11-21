@@ -23,14 +23,14 @@ const Food = ({ recipeList, clearRecipes }: Props) => {
   const [selectMode, setSelectMode] = useState(false);
 
   return (
-    <div>
+    <div style={{ padding: "1em" }}>
       {selectedView === Views.recipeList && (
         <RecipeList selectMode={selectMode} />
       )}
       {selectedView === Views.ingredientsList && <IngredientOutput />}
 
       <SelectRecipesContainer>
-        {recipeList.length > 0 && (
+        {recipeList.length > 0 && selectedView === Views.recipeList && (
           <Button
             color={theme.colors.affirmative}
             onClick={() => setSelectedView(Views.ingredientsList)}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import styled from "react-emotion";
 import { Paragraph1, Paragraph3 } from "../typography";
 
@@ -8,17 +8,24 @@ const Row = styled("div")`
   padding: 0.5em;
 `;
 
-interface Props {
+export interface ListRowProps {
   text: string;
   subText?: string;
   onClick?: () => void;
+  styleOverrides?: CSSProperties;
 }
 
-export const ListRow: React.SFC<Props> = ({ text, subText, onClick }) => (
+export const ListRow: React.SFC<ListRowProps> = ({
+  text,
+  subText,
+  onClick,
+  styleOverrides = {}
+}) => (
   <Row
     onClick={() => {
       !!onClick ? onClick() : undefined;
     }}
+    style={styleOverrides}
   >
     <Paragraph1>{text}</Paragraph1>
     <Paragraph3 style={{ marginLeft: "0.5em" }}>{subText}</Paragraph3>

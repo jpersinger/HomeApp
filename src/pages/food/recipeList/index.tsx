@@ -29,7 +29,7 @@ const RecipeList = ({
   const [addRecipeModalOpen, toggleAddRecipeModalOpen] = useState(false);
 
   return (
-    <div style={{ padding: "1em" }}>
+    <div>
       {map(groupedRecipes, (recipes, name) => (
         <div key={name} style={{ paddingTop: "2em" }}>
           <Headline1>{name}</Headline1>

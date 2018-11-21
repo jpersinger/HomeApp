@@ -1,7 +1,8 @@
-import { filter } from "lodash";
-import React from "react";
+import { cloneDeep, filter } from "lodash";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { ListRow } from "../../../components/listRow";
+import CheckboxRow from "../../../components/checkboxRow";
+import theme from "../../../components/theme";
 import {
   combineIngredients,
   convertMeasurementForDisplay
@@ -18,18 +19,35 @@ interface Props {
 }
 
 const IngredientOutput = ({ allRecipes, recipeList }: Props) => {
+  const [completedIngredients, setIngredientsSelected] = useState<string[]>([]);
+
   const filteredRecipes: Recipe[] = filter(
     allRecipes,
     ({ title }) => recipeList.indexOf(title) !== -1
   );
   const ingredients = combineIngredients(filteredRecipes);
-  console.log(ingredients);
+
+  const toggleIngredientSelection = (name: string) => {
+    const currentIngredients = cloneDeep(completedIngredients);
+    const index = currentIngredients.indexOf(name);
+    if (index === -1) {
+      currentIngredients.push(name);
+    } else {
+      currentIngredients.splice(index, 1);
+    }
+    setIngredientsSelected(currentIngredients);
+  };
 
   return (
     <div>
       {ingredients.map(({ amount, measurementType, name }) => (
-        <ListRow
+        <CheckboxRow
           key={name}
+          selected={completedIngredients.indexOf(name) !== -1}
+          onClick={() => {
+            toggleIngredientSelection(name);
+          }}
+          styleOverrides={{ borderBottom: theme.borders.listRowBorder }}
           text={name}
           subText={
             measurementType === MeasurementTypes.unit

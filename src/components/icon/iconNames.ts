@@ -1,7 +1,9 @@
 const names = {
   "list-menu": true,
   close: true,
-  add: true
+  add: true,
+  "empty-checkbox": true,
+  "filled-checkbox": true
 };
 
 // This is used instead of an enum to allow e.g. `<Icon name="trash" />` over
