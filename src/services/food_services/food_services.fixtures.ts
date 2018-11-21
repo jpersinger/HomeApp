@@ -1,4 +1,9 @@
-import { MealTypes, MeasurementTypes, Recipe } from "./food.definitions";
+import {
+  Ingredient,
+  MealTypes,
+  MeasurementTypes,
+  Recipe
+} from "./food.definitions";
 
 enum Ingredients {
   whiteSugar = "white sugar",
@@ -23,7 +28,21 @@ enum Ingredients {
   flatLeafParsley = "flat leaf parsley"
 }
 
-const sweetPotatoCasserole: Recipe = {
+export const emptyIngredient: Ingredient = {
+  name: "",
+  amount: 0,
+  measurementType: MeasurementTypes.unit
+};
+
+export const emptyRecipe: Recipe = {
+  title: "",
+  cookTime: 0,
+  mealType: MealTypes.snack,
+  ingredients: [emptyIngredient],
+  instructions: [""]
+};
+
+export const sweetPotatoCasserole: Recipe = {
   title: "Sweet Potato Casserole",
   mealType: MealTypes.side,
   cookTime: 0.5,

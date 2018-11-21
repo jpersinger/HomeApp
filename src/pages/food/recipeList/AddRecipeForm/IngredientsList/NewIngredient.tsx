@@ -3,8 +3,11 @@ import React from "react";
 import styled from "react-emotion";
 import DropDown from "../../../../../components/dropdown";
 import { Input } from "../../../../../components/inputs";
-import { Ingredient, MeasurementTypes } from "../../../food.definitions";
-import { ingredientOptions } from "../../../food.fixtures";
+import {
+  Ingredient,
+  MeasurementTypes
+} from "../../../../../services/food_services/food.definitions";
+import { ingredientOptions } from "../../../../../services/food_services/food_services.fixtures";
 
 const IngredientContainer = styled("div")`
   display: inline-grid;

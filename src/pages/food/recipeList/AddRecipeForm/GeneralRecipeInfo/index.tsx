@@ -3,13 +3,13 @@ import React from "react";
 import { connect } from "react-redux";
 import DropDown from "../../../../../components/dropdown";
 import { Input } from "../../../../../components/inputs";
+import { MealTypes } from "../../../../../services/food_services/food.definitions";
 import {
   updateNewRecipeCookTime,
   updateNewRecipeMealType,
   updateNewRecipeTitle
 } from "../../../../../services/redux/actions/food";
 import { RootState } from "../../../../../services/redux/reducers";
-import { MealTypes } from "../../../food.definitions";
 
 interface Props {
   title: string;

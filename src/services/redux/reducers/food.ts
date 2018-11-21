@@ -1,17 +1,16 @@
 import produce from "immer";
 import { cloneDeep, pullAt } from "lodash";
 import {
-  Ingredient,
-  MealTypes,
-  MeasurementTypes,
-  Recipe
-} from "../../../pages/food/food.definitions";
-import { recipes } from "../../../pages/food/food.fixtures";
-import {
   allIngredientsAreComplete,
   allInstructionsAreComplete,
   getCleanNewRecipe
 } from "../../food_services";
+import { Recipe } from "../../food_services/food.definitions";
+import {
+  emptyIngredient,
+  emptyRecipe,
+  recipes
+} from "../../food_services/food_services.fixtures";
 import {
   ADD_RECIPE,
   CLEAR_RECIPES,
@@ -31,20 +30,6 @@ export interface FoodState {
 
   newRecipe: Recipe;
 }
-
-const emptyIngredient: Ingredient = {
-  name: "",
-  amount: 0,
-  measurementType: MeasurementTypes.unit
-};
-
-const emptyRecipe: Recipe = {
-  title: "",
-  cookTime: 0,
-  mealType: MealTypes.snack,
-  ingredients: [emptyIngredient],
-  instructions: [""]
-};
 
 const initialState: FoodState = {
   allRecipes: recipes,

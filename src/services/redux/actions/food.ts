@@ -1,7 +1,7 @@
 import {
   MealTypes,
   MeasurementTypes
-} from "../../../pages/food/food.definitions";
+} from "../../food_services/food.definitions";
 import {
   ADD_RECIPE,
   CLEAR_RECIPES,

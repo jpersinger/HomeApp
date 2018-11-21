@@ -6,10 +6,10 @@ import IconButton from "../../../components/icon/iconButton";
 import { ListRow } from "../../../components/listRow";
 import theme from "../../../components/theme";
 import { Headline1 } from "../../../components/typography";
+import { getCookTimeString } from "../../../services/food_services";
+import { Recipe } from "../../../services/food_services/food.definitions";
 import { toggleRecipe } from "../../../services/redux/actions/food";
 import { RootState } from "../../../services/redux/reducers";
-import { Recipe } from "../food.definitions";
-import { getCookTimeString } from "../services";
 import AddRecipeModal from "./AddRecipeModal";
 import { AddRecipeContainer } from "./components";
 
@@ -51,7 +51,7 @@ const RecipeList = ({
               <ul>
                 {recipe.ingredients.map(
                   ({ name, amount, measurementType, extraInformation }) => (
-                    <li key={name}>
+                    <li key={name + recipe.title + amount}>
                       {amount} {measurementType} {name} {extraInformation}
                     </li>
                   )

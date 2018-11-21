@@ -2,9 +2,15 @@ import { filter } from "lodash";
 import React from "react";
 import { connect } from "react-redux";
 import { ListRow } from "../../../components/listRow";
+import {
+  combineIngredients,
+  convertMeasurementForDisplay
+} from "../../../services/food_services";
+import {
+  MeasurementTypes,
+  Recipe
+} from "../../../services/food_services/food.definitions";
 import { RootState } from "../../../services/redux/reducers";
-import { Recipe } from "../food.definitions";
-import { combineIngredients } from "../services";
 
 interface Props {
   allRecipes: Recipe[];
@@ -17,6 +23,7 @@ const IngredientOutput = ({ allRecipes, recipeList }: Props) => {
     ({ title }) => recipeList.indexOf(title) !== -1
   );
   const ingredients = combineIngredients(filteredRecipes);
+  console.log(ingredients);
 
   return (
     <div>
@@ -24,7 +31,11 @@ const IngredientOutput = ({ allRecipes, recipeList }: Props) => {
         <ListRow
           key={name}
           text={name}
-          subText={`${amount} ${measurementType}`}
+          subText={
+            measurementType === MeasurementTypes.unit
+              ? `${amount}`
+              : convertMeasurementForDisplay(amount)
+          }
         />
       ))}
     </div>

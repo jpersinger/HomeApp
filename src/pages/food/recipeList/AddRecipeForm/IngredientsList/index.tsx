@@ -1,12 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
+  Ingredient,
+  MeasurementTypes
+} from "../../../../../services/food_services/food.definitions";
+import {
   updateIngredientAmount,
   updateIngredientMeasurementType,
   updateIngredientName
 } from "../../../../../services/redux/actions/food";
 import { RootState } from "../../../../../services/redux/reducers";
-import { Ingredient, MeasurementTypes } from "../../../food.definitions";
 import NewIngredient from "./NewIngredient";
 
 interface Props {

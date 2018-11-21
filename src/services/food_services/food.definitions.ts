@@ -22,9 +22,18 @@ export enum MealTypes {
 }
 
 export enum MeasurementTypes {
-  oz = "oz",
+  unit = "unit",
+  pinch = "pinch", // about 1/8 tsp
+  dash = "dash", // about 1/8 tsp
   tsp = "tsp",
   tbsp = "tbsp",
+  oz = "oz",
+  floz = "floz",
   cup = "cup",
-  unit = "unit"
+  pint = "pint",
+  quart = "quart",
+  gallon = "gallon",
+  liter = "liter",
+  pound = "pound",
+  milliliter = "mL"
 }
