@@ -241,6 +241,8 @@ green beans
 peas or corn dish
 dessert
 mashed potatoes
+salad
+serving dishes?
 */
 
 export const recipes: Recipe[] = [
