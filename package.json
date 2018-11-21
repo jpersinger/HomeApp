@@ -4,7 +4,7 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/jpersinger/HomeApp.git"
+    "url": "git@github.com:jpersinger/HomeApp.git"
   },
   "dependencies": {
     "@types/jest": "23.3.9",
