@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import CheckboxRow from "../../../components/checkboxRow";
 import theme from "../../../components/theme";
+import { Paragraph2 } from "../../../components/typography";
 import {
   combineIngredients,
   convertMeasurementForDisplay
@@ -40,6 +41,25 @@ const IngredientOutput = ({ allRecipes, recipeList }: Props) => {
 
   return (
     <div>
+      <div
+        style={{
+          position: "fixed",
+          right: 0,
+          top: 0,
+          margin: "2em 2em 0 0",
+          backgroundColor:
+            completedIngredients.length === ingredients.length
+              ? theme.colors.affirmative
+              : theme.colors.primaryDark,
+          padding: "0.5em 1em",
+          borderRadius: 20,
+          color: theme.colors.white
+        }}
+      >
+        <Paragraph2>
+          {completedIngredients.length}/{ingredients.length}
+        </Paragraph2>
+      </div>
       {ingredients.map(({ amount, measurementType, name }) => (
         <CheckboxRow
           key={name}

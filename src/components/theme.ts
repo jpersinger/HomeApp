@@ -8,6 +8,7 @@ const theme = {
     darkBlue: "#030F3D",
     secondary: "#F46A41",
     primary: "#41DFF4",
+    primaryDark: "#3BC8DB",
     transparentAffirmative: "rgb(56,209,9, 0.07);"
   }
 };
