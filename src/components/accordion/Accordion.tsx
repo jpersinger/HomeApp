@@ -8,7 +8,7 @@ const AccordionContainer = styled("div")<{
   maxHeight,
   overflow: "hidden",
   transition: "all 1s ease",
-  paddingBottom: expanded ? 30 : 0
+  marginBottom: expanded ? "1em" : 0
 }));
 
 interface Props {

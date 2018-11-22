@@ -36,7 +36,14 @@ enum Ingredients {
   vanillaPuddingMix = "vanilla pudding mix",
   whippedTopping = "whipped topping",
   banana = "banana",
-  vanillaWafers = "vanilla wafers"
+  vanillaWafers = "vanilla wafers",
+  frozenCorn = "frozen corn",
+  vegetableBroth = "vegetable broth",
+  rosemary = "rosemary",
+  thyme = "thyme",
+  sage = "sage",
+  whiteBread = "white bread",
+  yellowOnion = "yellow onion"
 }
 
 export const emptyIngredient: Ingredient = {
@@ -349,6 +356,119 @@ const bananaPudding: Recipe = {
   ]
 };
 
+const stuffing: Recipe = {
+  title: "Stuffing",
+  cookTime: 1.5,
+  mealType: MealTypes.side,
+  ingredients: [
+    {
+      name: Ingredients.unsaltedButter,
+      amount: 0.75,
+      measurementType: MeasurementTypes.cup
+    },
+    {
+      name: Ingredients.whiteBread,
+      amount: 1,
+      measurementType: MeasurementTypes.pound,
+      extraInformation: "about 10 cups, day-old, 1 inch pieces"
+    },
+    {
+      name: Ingredients.yellowOnion,
+      amount: 2.5,
+      measurementType: MeasurementTypes.cup
+    },
+    {
+      name: Ingredients.flatLeafParsley,
+      amount: 0.5,
+      measurementType: MeasurementTypes.cup
+    },
+    {
+      name: Ingredients.sage,
+      amount: 2,
+      measurementType: MeasurementTypes.tbsp
+    },
+    {
+      name: Ingredients.rosemary,
+      amount: 1,
+      measurementType: MeasurementTypes.tbsp
+    },
+    {
+      name: Ingredients.thyme,
+      amount: 1,
+      measurementType: MeasurementTypes.tbsp
+    },
+    {
+      name: Ingredients.salt,
+      amount: 2,
+      measurementType: MeasurementTypes.tsp
+    },
+    {
+      name: Ingredients.blackPepper,
+      amount: 1,
+      measurementType: MeasurementTypes.tsp
+    },
+    {
+      name: Ingredients.vegetableBroth,
+      amount: 2.5,
+      measurementType: MeasurementTypes.cup
+    },
+    {
+      name: Ingredients.egg,
+      amount: 2,
+      measurementType: MeasurementTypes.unit
+    }
+  ],
+  instructions: [
+    'Preheat oven to 250°F. Butter a 13x9x2" baking dish and set aside. Scatter bread in a single layer on a rimmed baking sheet. Bake, stirring occasionally, until dried out, about 1 hour. Let cool; transfer to a very large bowl.',
+    "Meanwhile, melt 3/4 cup butter in a large skillet over medium-high heat; add onions and celery. Stir often until just beginning to brown, about 10 minutes. Add to bowl with bread; stir in herbs, salt, and pepper. Drizzle in 1 1/4 cups broth and toss gently. Let cool.",
+    "Preheat oven to 350°F. Whisk 1 1/4 cups broth and eggs in a small bowl. Add to bread mixture; fold gently until thoroughly combined. Transfer to prepared dish, cover with foil, and bake until an instant-read thermometer inserted into the center of dressing registers 160°F, about 40 minutes. DO AHEAD: Dressing can be made 1 day ahead. Uncover; let cool. Cover; chill.",
+    "Bake dressing, uncovered, until set and top is browned and crisp, 40-45 minutes longer (if chilled, add 10-15 minutes)."
+  ]
+};
+
+const creamedCorn: Recipe = {
+  title: "Creamed Corn",
+  cookTime: 0,
+  mealType: MealTypes.side,
+  ingredients: [
+    {
+      name: Ingredients.frozenCorn,
+      amount: 1,
+      measurementType: MeasurementTypes.unit,
+      extraInformation: "10 - 16 oz"
+    },
+    {
+      name: Ingredients.butter,
+      amount: 3,
+      measurementType: MeasurementTypes.tbsp
+    },
+    {
+      name: Ingredients.allPurposeFlour,
+      amount: 3,
+      measurementType: MeasurementTypes.tbsp
+    },
+    {
+      name: Ingredients.milk,
+      amount: 2,
+      measurementType: MeasurementTypes.cup
+    },
+    {
+      name: Ingredients.whiteSugar,
+      amount: 2,
+      measurementType: MeasurementTypes.tbsp,
+      extraInformation: "2 - 3 tbsp"
+    }
+  ],
+  instructions: [
+    "Cook corn according to package directions; I use the microwave.",
+    "Melt butter in saucepan, stir in flour and blend well.",
+    "Add milk, about 1/2 cup at a time, and blend with whisk.",
+    "Cook over medium heat until thickened.",
+    "Stir in sugar, salt and pepper.",
+    "Add cooked, drained corn."
+  ]
+};
+
 /*
 https://www.allrecipes.com/recipe/21261/yummy-sweet-potato-casserole/
 https://www.foodnetwork.com/recipes/food-network-kitchen/perfect-cranberry-sauce-recipe-2104277
@@ -356,16 +476,8 @@ https://www.tasteofhome.com/recipes/cranberry-apple-crisp/
 https://www.foodnetwork.com/recipes/ina-garten/sauteed-carrots-recipe-1916159
 https://www.foodnetwork.com/recipes/rachael-ray/green-beans-with-toasted-almonds-recipe-1940021
 https://www.allrecipes.com/recipe/21398/banana-pudding-iv/?internalSource=hub%20recipe&referringId=977&referringContentType=Recipe%20Hub&clickId=cardslot%2016
-*/
-
-/*
-turkey
-gravy
-rolls
-peas or corn dish
-mashed potatoes
-salad
-serving dishes?
+https://www.epicurious.com/recipes/food/views/-simple-is-best-dressing-51124210
+https://www.geniuskitchen.com/recipe/creamed-corn-145165
 */
 
 export const recipes: Recipe[] = [
@@ -374,7 +486,9 @@ export const recipes: Recipe[] = [
   cranberryAppleCrisp,
   sauteedCarrots,
   greenBeansWithAlmonds,
-  bananaPudding
+  bananaPudding,
+  stuffing,
+  creamedCorn
 ];
 
 export const ingredientOptions: string[] = [
