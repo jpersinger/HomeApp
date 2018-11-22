@@ -22,7 +22,9 @@ const Accordion = (props: Props) => {
   const { expanded } = props;
   const innerDom = accordionReference.current;
   const innerHeight = (innerDom && innerDom.clientHeight) || 0;
-  const currentMaxHeight = expanded ? innerHeight || "none" : 0;
+  const currentMaxHeight = expanded ? innerHeight + 16 || "none" : 0;
+
+  console.log(innerHeight);
 
   return (
     <AccordionContainer maxHeight={currentMaxHeight} expanded={expanded}>
