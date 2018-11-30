@@ -5,7 +5,7 @@ import { RECIPE_NAMES } from "./constants";
 let client: redis.RedisClient;
 
 export const setup = () => {
-  console.log("setting up", process.env.REDISTOGO_URL);
+  console.log("setting up", process.env);
   if (process.env.REDISTOGO_URL) {
     console.log("process env", process.env.REDISTOGO_URL);
     const rtg = url.parse(process.env.REDISTOGO_URL) || {};
