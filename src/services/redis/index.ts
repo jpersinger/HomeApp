@@ -5,7 +5,7 @@ import { RECIPE_NAMES } from "./constants";
 let client: redis.RedisClient;
 
 export const setup = () => {
-  console.log("setting up");
+  console.log("setting up", process.env.REDISTOGO_URL);
   if (process.env.REDISTOGO_URL) {
     console.log("process env", process.env.REDISTOGO_URL);
     const rtg = url.parse(process.env.REDISTOGO_URL) || {};
@@ -18,6 +18,7 @@ export const setup = () => {
     client.auth(auth.split(":")[1]);
     console.log("client again", client);
   } else {
+    console.log("creating new client");
     client = redis.createClient();
     console.log("new client", client);
   }
@@ -29,10 +30,12 @@ export const setup = () => {
 };
 
 const sendLocalData = () => {
+  console.log("sending");
   client.hset(RECIPE_NAMES, "oatmeal", "piece 1", redis.print);
 };
 
 const pullServerData = () => {
+  console.log("pulling");
   client.hkeys(RECIPE_NAMES, (err, replies) => {
     console.log(replies.length, " replies:");
     replies.forEach((reply, i) => {
