@@ -13,7 +13,7 @@ const AccordionContainer = styled("div")<{
 
 interface Props {
   expanded: boolean;
-  children: React.ReactChildren;
+  children: React.ReactChild;
 }
 
 const Accordion = (props: Props) => {

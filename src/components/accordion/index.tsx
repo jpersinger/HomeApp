@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styled from "react-emotion";
+import IconButton from "../icon/iconButton";
 import theme from "../theme";
 import Accordion from "./Accordion";
+import { AccordionButton, Section } from "./components";
 
 interface AccordionSectionProps {
   aboveTheFold: React.ReactNode;
@@ -9,14 +10,9 @@ interface AccordionSectionProps {
   children: any;
   selected: boolean;
   selectItem?: () => void;
+  edit?: () => void;
+  delete?: () => void;
 }
-
-const Section = styled("div")<{ selected: boolean }>(({ selected }) => ({
-  borderBottom: theme.borders.listRowBorder,
-  cursor: "pointer",
-  backgroundColor: selected ? "lightgray" : "",
-  transition: "all 400ms ease"
-}));
 
 const AccordionSection = (props: AccordionSectionProps) => {
   const [expanded, toggleExpanded] = useState(false);
@@ -39,7 +35,42 @@ const AccordionSection = (props: AccordionSectionProps) => {
       selected={props.selected && props.selectMode}
     >
       {props.aboveTheFold}
-      <Accordion expanded={expanded}>{props.children}</Accordion>
+      <Accordion expanded={expanded}>
+        <div>
+          <div>{props.children}</div>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            {!!props.edit && (
+              <AccordionButton
+                fill={theme.colors.primary}
+                style={{
+                  paddingLeft: 4
+                }}
+              >
+                <IconButton
+                  name="edit"
+                  onClick={props.edit}
+                  fill={theme.colors.primary}
+                />
+              </AccordionButton>
+            )}
+            {!!props.delete && (
+              <AccordionButton
+                fill={theme.colors.negative}
+                style={{
+                  paddingLeft: 2,
+                  marginLeft: "1em"
+                }}
+              >
+                <IconButton
+                  name="delete"
+                  onClick={props.delete}
+                  fill={theme.colors.negative}
+                />
+              </AccordionButton>
+            )}
+          </div>
+        </div>
+      </Accordion>
     </Section>
   );
 };

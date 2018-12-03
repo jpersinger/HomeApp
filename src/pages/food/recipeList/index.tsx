@@ -41,6 +41,8 @@ const RecipeList = ({
                 toggleRecipe(recipe.title);
               }}
               selected={recipeList.indexOf(recipe.title) !== -1}
+              edit={() => {}}
+              delete={() => {}}
               aboveTheFold={
                 <ListRow
                   text={recipe.title}
