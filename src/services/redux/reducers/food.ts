@@ -8,12 +8,13 @@ import {
 import { Recipe } from "../../food_services/food.definitions";
 import {
   emptyIngredient,
-  emptyRecipe,
-  recipes
+  emptyRecipe
 } from "../../food_services/food_services.fixtures";
+import { sendNewRecipe } from "../../server";
 import {
   ADD_RECIPE,
   CLEAR_RECIPES,
+  SET_RECIPES,
   TOGGLE_RECIPE,
   UPDATE_INGREDIENT_AMOUNT,
   UPDATE_INGREDIENT_MEASUREMENT_TYPE,
@@ -32,7 +33,7 @@ export interface FoodState {
 }
 
 const initialState: FoodState = {
-  allRecipes: recipes,
+  allRecipes: [],
   recipeList: [],
   newRecipe: emptyRecipe
 };
@@ -42,6 +43,10 @@ export default (state = initialState, action: any) =>
     const currentIngredients = cloneDeep(state.newRecipe.ingredients);
 
     switch (action.type) {
+      case SET_RECIPES:
+        newState.allRecipes = action.recipes;
+        break;
+
       case TOGGLE_RECIPE:
         const index = state.recipeList.indexOf(action.recipeTitle);
         const selectedRecipes = cloneDeep(state.recipeList);
@@ -59,7 +64,9 @@ export default (state = initialState, action: any) =>
 
       case ADD_RECIPE:
         const allRecipes = cloneDeep(state.allRecipes);
-        allRecipes.push(getCleanNewRecipe(state.newRecipe));
+        const newRecipe = getCleanNewRecipe(state.newRecipe);
+        sendNewRecipe(newRecipe);
+        allRecipes.push(newRecipe);
         newState.allRecipes = allRecipes;
         newState.newRecipe = emptyRecipe;
         break;

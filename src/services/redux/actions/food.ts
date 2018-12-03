@@ -1,10 +1,12 @@
 import {
   MealTypes,
-  MeasurementTypes
+  MeasurementTypes,
+  Recipe
 } from "../../food_services/food.definitions";
 import {
   ADD_RECIPE,
   CLEAR_RECIPES,
+  SET_RECIPES,
   TOGGLE_RECIPE,
   UPDATE_INGREDIENT_AMOUNT,
   UPDATE_INGREDIENT_MEASUREMENT_TYPE,
@@ -68,4 +70,9 @@ export const updateInstruction = (index: number, instruction: string) => ({
   type: UPDATE_INSTRUCTION,
   index,
   instruction
+});
+
+export const setRecipes = (recipes: Recipe[]) => ({
+  type: SET_RECIPES,
+  recipes
 });
