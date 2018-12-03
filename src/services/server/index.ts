@@ -1,8 +1,8 @@
 import axios from "axios";
 import { Recipe } from "../food_services/food.definitions";
 
-// const SERVER_URL = "https://kisby-home-app-server.herokuapp.com";
-const SERVER_URL = "http://localhost:3001";
+const SERVER_URL = "https://kisby-home-app-server.herokuapp.com";
+// const SERVER_URL = "http://localhost:3001";
 
 const RECIPE_HASH = "/recipes";
 
