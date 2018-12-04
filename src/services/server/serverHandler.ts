@@ -8,8 +8,13 @@ class ServerHandler {
 
   intialize() {
     setInterval(() => {
-      this.pullServerData();
+      // this.pullServerData();
+      setRecipesInStore();
     }, 60000);
+
+    setInterval(() => {
+      setBudgetInStore();
+    }, 20000);
   }
 
   pullServerData() {
