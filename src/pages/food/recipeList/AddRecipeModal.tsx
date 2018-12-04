@@ -1,45 +1,111 @@
 import { isEmpty } from "lodash";
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import Button from "../../../components/button";
-import Modal from "../../../components/modal";
+import MultiModal, {
+  ModalPageProps
+} from "../../../components/modal/multiModal";
+import theme from "../../../components/theme";
 import { getCleanNewRecipe } from "../../../services/food_services";
 import { addRecipe } from "../../../services/redux/actions/food";
 import { RootState } from "../../../services/redux/reducers";
-import AddRecipeForm from "./AddRecipeForm";
+import GeneralRecipeInfo from "./AddRecipeForm/GeneralRecipeInfo";
+import IngredientsList from "./AddRecipeForm/IngredientsList";
+import InstructionsList from "./AddRecipeForm/InstructionsList";
 
 interface Props {
   open: boolean;
   toggleOpen: () => void;
   addRecipe: () => void;
-  addDisabled: boolean;
+  generalInfoComplete: boolean;
+  ingredientsComplete: boolean;
+  instructionsComplete: boolean;
 }
 
 const AddRecipeModal = ({
   open,
   toggleOpen,
   addRecipe,
-  addDisabled
+  generalInfoComplete,
+  ingredientsComplete,
+  instructionsComplete
 }: Props) => {
+  const [pageIndex, setPageIndex] = useState(0);
+
+  const pages: ModalPageProps[] = [
+    {
+      title: "Recipe Information",
+      content: <GeneralRecipeInfo />,
+      footer: (
+        <Button
+          onClick={() => {
+            setPageIndex(1);
+          }}
+          color={theme.colors.primary}
+          disabled={!generalInfoComplete}
+        >
+          Next
+        </Button>
+      )
+    },
+    {
+      title: "Ingredients",
+      content: <IngredientsList />,
+      footer: (
+        <div style={{ display: "flex", width: "100%" }}>
+          <Button
+            onClick={() => {
+              setPageIndex(0);
+            }}
+            color={theme.colors.secondary}
+          >
+            Back
+          </Button>
+          <Button
+            onClick={() => {
+              setPageIndex(2);
+            }}
+            disabled={!ingredientsComplete}
+            style={{ marginLeft: "1em" }}
+            color={theme.colors.primary}
+          >
+            Next
+          </Button>
+        </div>
+      )
+    },
+    {
+      title: "Instructions",
+      content: <InstructionsList />,
+      footer: (
+        <div style={{ display: "flex", width: "100%" }}>
+          <Button
+            onClick={() => {
+              setPageIndex(1);
+            }}
+            color={theme.colors.secondary}
+          >
+            Back
+          </Button>
+          <Button
+            onClick={() => {
+              addRecipe();
+              toggleOpen();
+            }}
+            disabled={!instructionsComplete}
+            style={{ marginLeft: "1em" }}
+          >
+            Save
+          </Button>
+        </div>
+      )
+    }
+  ];
+
   return (
     <div>
       {open && (
-        <Modal
-          title="Add New Recipe"
-          close={toggleOpen}
-          content={<AddRecipeForm />}
-          footer={
-            <Button
-              onClick={() => {
-                addRecipe();
-                toggleOpen();
-              }}
-              disabled={addDisabled}
-            >
-              Save
-            </Button>
-          }
-        />
+        <MultiModal close={toggleOpen} pages={pages} pageIndex={pageIndex} />
       )}
     </div>
   );
@@ -48,11 +114,9 @@ const AddRecipeModal = ({
 const mapStateToProps = ({ food: { newRecipe } }: RootState) => {
   const cleanNewRecipe = getCleanNewRecipe(newRecipe);
   return {
-    addDisabled:
-      isEmpty(newRecipe.title) ||
-      newRecipe.cookTime === 0 ||
-      !cleanNewRecipe.ingredients.length ||
-      !cleanNewRecipe.instructions.length
+    generalInfoComplete: !isEmpty(newRecipe.title) && !!newRecipe.cookTime,
+    ingredientsComplete: !!cleanNewRecipe.ingredients.length,
+    instructionsComplete: !!cleanNewRecipe.instructions.length
   };
 };
 

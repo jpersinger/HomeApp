@@ -1,6 +1,5 @@
-import { getRecipes } from ".";
-import store from "../redux";
-import { setRecipes } from "../redux/actions/food";
+import { setBudgetInStore } from "./budget";
+import { setRecipesInStore } from "./recipes";
 
 class ServerHandler {
   constructor() {
@@ -14,10 +13,8 @@ class ServerHandler {
   }
 
   pullServerData() {
-    const recipePromise = getRecipes();
-    recipePromise.then(recipes => {
-      store.dispatch(setRecipes(recipes));
-    });
+    setRecipesInStore();
+    setBudgetInStore();
   }
 }
 

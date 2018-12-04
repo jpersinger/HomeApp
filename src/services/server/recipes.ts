@@ -1,12 +1,17 @@
 import axios from "axios";
 import { Recipe } from "../food_services/food.definitions";
+import store from "../redux";
+import { setRecipes } from "../redux/actions/food";
+import { RECIPE_HASH, SERVER_URL } from "./constants";
 
-const SERVER_URL = "https://kisby-home-app-server.herokuapp.com";
-// const SERVER_URL = "http://localhost:3001";
+export const setRecipesInStore = () => {
+  const recipePromise = getRecipes();
+  recipePromise.then(recipes => {
+    store.dispatch(setRecipes(recipes));
+  });
+};
 
-const RECIPE_HASH = "/recipes";
-
-export const getRecipes = (): Promise<Recipe[]> =>
+const getRecipes = (): Promise<Recipe[]> =>
   new Promise((resolve, reject) => {
     axios
       .get(SERVER_URL + RECIPE_HASH)

@@ -10,6 +10,7 @@ import {
   updateNewRecipeTitle
 } from "../../../../../services/redux/actions/food";
 import { RootState } from "../../../../../services/redux/reducers";
+import { CookTimeContainer, RecipeContainer } from "./components";
 
 interface Props {
   title: string;
@@ -28,21 +29,15 @@ const GeneralRecipeInfo = ({
   mealType,
   updateMealType
 }: Props) => (
-  <div>
+  <RecipeContainer>
     <Input
       placeholder="Meal Name"
       value={title}
       onChange={event => {
         updateTitle(event.target.value);
       }}
-    />
-    <Input
-      type="number"
-      placeholder="Cook Time (hours)"
-      value={cookTime || ""}
-      onChange={event => {
-        updateCookTime(parseInt(event.target.value));
-      }}
+      width="90%"
+      style={{ marginTop: "1em", textAlign: "center" }}
     />
     <DropDown
       itemList={map(MealTypes, mealType => mealType)}
@@ -51,7 +46,20 @@ const GeneralRecipeInfo = ({
         updateMealType(mealType as MealTypes);
       }}
     />
-  </div>
+    <CookTimeContainer>
+      <Input
+        type="number"
+        placeholder="Cook Time"
+        value={cookTime || ""}
+        onChange={event => {
+          updateCookTime(parseInt(event.target.value));
+        }}
+        width="100px"
+        style={{ marginTop: "1em", textAlign: "right", marginRight: 5 }}
+      />
+      hours
+    </CookTimeContainer>
+  </RecipeContainer>
 );
 
 export default connect(

@@ -5,6 +5,7 @@ export const Headline1 = styled("p")`
   margin: 0;
   display: inline;
   font-weight: 600;
+  font-family: Quicksand;
 `;
 
 export const Paragraph1 = styled("p")`

@@ -10,7 +10,7 @@ import {
   emptyIngredient,
   emptyRecipe
 } from "../../food_services/food_services.fixtures";
-import { sendNewRecipe } from "../../server";
+import { sendNewRecipe } from "../../server/recipes";
 import {
   ADD_RECIPE,
   CLEAR_RECIPES,
