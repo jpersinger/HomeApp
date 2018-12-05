@@ -29,6 +29,7 @@ const PiggyBanks = ({ piggyBanks, deletePiggyBank }: Props) => {
     <div>
       <BudgetSection
         items={items}
+        sortOnSubtext
         onAdd={() => {
           setNewPiggyBankModalOpen(true);
         }}

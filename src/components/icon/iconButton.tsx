@@ -6,13 +6,16 @@ interface Props extends IconHelperProps {
   onClick: () => void;
   container?: boolean;
   containerFill?: string;
+  hasCircleBorder?: boolean;
 }
 
 const Container = styled("button")<{
   container: boolean;
   containerFill: string;
   size: number;
-}>(({ container, containerFill, size }) => ({
+  hasCircleBorder?: boolean;
+  fill?: string;
+}>(({ container, containerFill, size, hasCircleBorder, fill }) => ({
   borderRadius: container ? 500 : 0,
   backgroundColor: containerFill,
   cursor: "pointer",
@@ -21,7 +24,7 @@ const Container = styled("button")<{
   alignItems: "center",
   height: size,
   width: size,
-  border: "none",
+  border: hasCircleBorder ? `1px solid ${fill}` : "none",
   padding: 0
 }));
 
@@ -31,6 +34,8 @@ const IconButton = (props: Props) => (
     containerFill={props.containerFill || "transparent"}
     size={(props.size || 24) + 5}
     onClick={props.onClick}
+    hasCircleBorder={props.hasCircleBorder}
+    fill={props.fill}
   >
     <Icon {...props} styleOverrides={{ display: "flex" }} />
   </Container>

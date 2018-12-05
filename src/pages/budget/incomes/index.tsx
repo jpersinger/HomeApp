@@ -23,6 +23,7 @@ const Incomes = ({ incomes, deleteIncome }: Props) => {
     <div>
       <BudgetSection
         items={items}
+        sortOnSubtext={false}
         onAdd={() => {
           setNewIncomeModalOpen(true);
         }}
@@ -37,7 +38,6 @@ const Incomes = ({ incomes, deleteIncome }: Props) => {
           toggleOpen={() => {
             setNewIncomeModalOpen(false);
           }}
-          incomes={incomes}
         />
       )}
     </div>

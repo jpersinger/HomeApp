@@ -8,7 +8,16 @@ export const Headline1 = styled("p")`
   font-family: Quicksand;
 `;
 
+export const Headline2 = styled("p")`
+  font-size: 1.5em;
+  margin: 0;
+  display: inline;
+  font-weight: 600;
+  font-family: Quicksand;
+`;
+
 export const Paragraph1 = styled("p")`
+  font-family: Quicksand;
   font-size: 1em;
   margin: 0;
   display: inline;

@@ -1,10 +1,13 @@
 import styled from "react-emotion";
 import theme from "../theme";
 
-export const Input = styled("input")<{ width?: number | string }>(
-  ({ width = "100%" }) => `
+export const Input = styled("input")<{
+  width?: number | string;
+  height?: number | string;
+}>(
+  ({ width = "100%", height = "2.4em" }) => `
   width: ${width};
-  height: 2.4em;
+  height: ${height};
   font-family: Quicksand;
   font-size: 1em;
   border: none;

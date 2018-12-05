@@ -1,6 +1,7 @@
 const names = {
   "list-menu": true,
   close: true,
+  check: true,
   add: true,
   "empty-checkbox": true,
   "filled-checkbox": true,

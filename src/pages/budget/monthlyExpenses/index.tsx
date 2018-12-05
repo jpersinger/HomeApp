@@ -20,6 +20,7 @@ const MonthlyExpenses = ({ expenses, deleteMonthlyExpense }: Props) => {
     <div>
       <BudgetSection
         items={items}
+        sortOnSubtext
         onAdd={() => {
           setNewExpenseModalOpen(true);
         }}

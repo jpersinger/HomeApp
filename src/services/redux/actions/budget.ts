@@ -1,4 +1,5 @@
 import {
+  GeneralBudget,
   Income,
   MonthlyExpense,
   PiggyBank
@@ -10,10 +11,32 @@ import {
   DELETE_INCOME,
   DELETE_MONTHLY_EXPENSE,
   DELETE_PIGGY_BANK,
+  SET_GENERAL_BUDGET,
   SET_INCOMES,
   SET_MONTHLY_EXPENSES,
-  SET_PIGGY_BANKS
+  SET_PIGGY_BANKS,
+  UPDATE_CREDIT_CARD,
+  UPDATE_GENERAL_BANK_BUDGET
 } from "../constants";
+
+export const setGeneralBudget = (generalBudget: GeneralBudget) => ({
+  type: SET_GENERAL_BUDGET,
+  generalBudget
+});
+
+export const updateGeneralBankBudget = (amount: number) => ({
+  type: UPDATE_GENERAL_BANK_BUDGET,
+  amount
+});
+
+export const updateCreditCard = (
+  person: "Julie" | "Bryan",
+  amount: number
+) => ({
+  type: UPDATE_CREDIT_CARD,
+  person,
+  amount
+});
 
 export const setMonthlyExpenses = (monthlyExpenses: MonthlyExpense[]) => ({
   type: SET_MONTHLY_EXPENSES,

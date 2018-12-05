@@ -1,6 +1,7 @@
 import produce from "immer";
 import { cloneDeep, findIndex } from "lodash";
 import {
+  GeneralBudget,
   Income,
   MonthlyExpense,
   PiggyBank
@@ -11,7 +12,9 @@ import {
   sendDeletePiggyBank,
   sendNewIncome,
   sendNewMonthlyExpense,
-  sendNewPiggyBank
+  sendNewPiggyBank,
+  sendUpdateCreditCardInfo,
+  sendUpdateGeneralBankInfo
 } from "../../server/budget";
 import {
   ADD_INCOME,
@@ -20,18 +23,27 @@ import {
   DELETE_INCOME,
   DELETE_MONTHLY_EXPENSE,
   DELETE_PIGGY_BANK,
+  SET_GENERAL_BUDGET,
   SET_INCOMES,
   SET_MONTHLY_EXPENSES,
-  SET_PIGGY_BANKS
+  SET_PIGGY_BANKS,
+  UPDATE_CREDIT_CARD,
+  UPDATE_GENERAL_BANK_BUDGET
 } from "../constants";
 
 export interface BudgetState {
+  generalBudget: GeneralBudget;
   allMonthlyExpenses: MonthlyExpense[];
   allPiggyBanks: PiggyBank[];
   allIncomes: Income[];
 }
 
 const initialState: BudgetState = {
+  generalBudget: {
+    general: { bankAmount: 0 },
+    julie_credit: { amount: 0 },
+    bryan_credit: { amount: 0 }
+  },
   allMonthlyExpenses: [],
   allPiggyBanks: [],
   allIncomes: []
@@ -40,6 +52,24 @@ const initialState: BudgetState = {
 export default (state = initialState, action: any) =>
   produce(state, newState => {
     switch (action.type) {
+      case SET_GENERAL_BUDGET:
+        newState.generalBudget = action.generalBudget;
+        break;
+
+      case UPDATE_GENERAL_BANK_BUDGET:
+        sendUpdateGeneralBankInfo(action.amount);
+        newState.generalBudget.general.bankAmount = action.amount;
+        break;
+
+      case UPDATE_CREDIT_CARD:
+        sendUpdateCreditCardInfo(action.person, action.amount);
+        if (action.person === "Julie") {
+          newState.generalBudget.julie_credit.amount = action.amount;
+        } else {
+          newState.generalBudget.bryan_credit.amount = action.amount;
+        }
+        break;
+
       case SET_MONTHLY_EXPENSES:
         newState.allMonthlyExpenses = action.monthlyExpenses;
         break;

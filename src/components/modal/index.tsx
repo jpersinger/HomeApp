@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "react-emotion";
-import theme from "../theme";
+import FixedPortal from "../fixedPortal";
 import { Headline1 } from "../typography";
+import { Overlay } from "./components";
 
 const ModalContainer = styled("div")`
   font-family: Quicksand;
@@ -36,17 +37,6 @@ const ModalFooter = styled("div")`
   padding: 0 1em;
 `;
 
-const Overlay = styled("div")`
-  width: 100vw;
-  height: 100vh;
-  background-color: ${theme.colors.darkBlue};
-  opacity: 0.4;
-  position: fixed;
-  top: 0;
-  margin-left: -16px;
-  z-index: 2;
-`;
-
 interface Props {
   title: string;
   content: React.ReactChild;
@@ -54,19 +44,17 @@ interface Props {
   footer?: React.ReactChild;
 }
 
-const Modal = (props: Props) => {
-  return (
-    <div>
-      <Overlay onClick={props.close} />
-      <ModalContainer>
-        <ModalTitle>
-          <Headline1>{props.title}</Headline1>
-        </ModalTitle>
-        <div>{props.content}</div>
-        {!!props.footer && <ModalFooter>{props.footer}</ModalFooter>}
-      </ModalContainer>
-    </div>
-  );
-};
+const Modal = (props: Props) => (
+  <FixedPortal>
+    <Overlay onClick={props.close} />
+    <ModalContainer>
+      <ModalTitle>
+        <Headline1>{props.title}</Headline1>
+      </ModalTitle>
+      <div>{props.content}</div>
+      {!!props.footer && <ModalFooter>{props.footer}</ModalFooter>}
+    </ModalContainer>
+  </FixedPortal>
+);
 
 export default Modal;

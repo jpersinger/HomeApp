@@ -10,10 +10,9 @@ import { addIncome } from "../../../services/redux/actions/budget";
 interface Props {
   toggleOpen: () => void;
   addIncome: (income: Income) => void;
-  incomes: Income[];
 }
 
-const NewIncomeModal = ({ toggleOpen, addIncome, incomes }: Props) => {
+const NewIncomeModal = ({ toggleOpen, addIncome }: Props) => {
   const [amount, setAmount] = useState(0);
   const [dayReceived, setDayReceived] = useState(0);
 
@@ -46,7 +45,7 @@ const NewIncomeModal = ({ toggleOpen, addIncome, incomes }: Props) => {
       footer={
         <Button
           onClick={() => {
-            addIncome({ amount, dayReceived, id: getNextIncomeId(incomes) });
+            addIncome({ amount, dayReceived, id: getNextIncomeId() });
             toggleOpen();
           }}
           disabled={!amount || !dayReceived}

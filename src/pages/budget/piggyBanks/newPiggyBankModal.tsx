@@ -17,6 +17,7 @@ const NewPiggyBankModal = ({ toggleOpen, addPiggyBank }: Props) => {
   const [title, setTitle] = useState("");
   const [amountPerMonth, setAmountPerMonth] = useState(0);
   const [goalTotal, setGoalTotal] = useState(0);
+  const [currentTotal, setCurrentTotal] = useState(0);
 
   return (
     <Modal
@@ -31,21 +32,30 @@ const NewPiggyBankModal = ({ toggleOpen, addPiggyBank }: Props) => {
             }}
           />
           <Input
+            type="number"
+            step="0.01"
             placeholder="Amount Per Month"
             value={!!amountPerMonth ? amountPerMonth : ""}
             onChange={event => {
-              if (!!event.target.value) {
-                setAmountPerMonth(parseInt(event.target.value));
-              }
+              setAmountPerMonth(parseInt(event.target.value));
             }}
           />
           <Input
+            type="number"
+            step="0.01"
             placeholder="Goal Amount"
             value={!!goalTotal ? goalTotal : ""}
             onChange={event => {
-              if (!!event.target.value) {
-                setGoalTotal(parseInt(event.target.value));
-              }
+              setGoalTotal(parseInt(event.target.value));
+            }}
+          />
+          <Input
+            type="number"
+            step="0.01"
+            placeholder="Current Amount Towards Goal"
+            value={!!currentTotal ? currentTotal : ""}
+            onChange={event => {
+              setCurrentTotal(parseInt(event.target.value));
             }}
           />
         </div>
@@ -57,7 +67,7 @@ const NewPiggyBankModal = ({ toggleOpen, addPiggyBank }: Props) => {
             addPiggyBank({
               title,
               amountPerMonth,
-              currentTotal: 0,
+              currentTotal,
               goalTotal: goalTotal,
               lastUpdated: JSON.stringify(moment())
             });

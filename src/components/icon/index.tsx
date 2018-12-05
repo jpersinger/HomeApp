@@ -1,5 +1,6 @@
 import React, { CSSProperties } from "react";
 import Add from "../../assets/add";
+import Check from "../../assets/check";
 import Close from "../../assets/close";
 import Delete from "../../assets/delete";
 import Edit from "../../assets/edit";
@@ -41,6 +42,8 @@ const Icon: React.SFC<IconHelperProps> = ({
           return <Edit size={size} fill={fill} />;
         case "delete":
           return <Delete size={size} fill={fill} />;
+        case "check":
+          return <Check size={size} fill={fill} />;
       }
     })()}
   </div>
