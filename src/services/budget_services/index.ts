@@ -39,12 +39,14 @@ export const getRemainingForMonth = ({
   );
   const allPiggyAmounts = reduce(
     allPiggyBanks,
-    (sum, { amountPerMonth, currentTotal }) =>
-      sum + amountPerMonth + currentTotal,
+    (sum, { amountPerMonth, currentTotal, goalTotal }) => {
+      if (currentTotal === goalTotal) {
+        return sum;
+      }
+      return sum + amountPerMonth + currentTotal;
+    },
     0
   );
-
-  console.log(allPiggyBanks, allPiggyAmounts);
 
   const withCreditRemoved =
     generalBudget.general.bankAmount -

@@ -7,6 +7,13 @@ import theme from "../../components/theme";
 import { Headline1, Paragraph1 } from "../../components/typography";
 import { getPercentCompleteColor } from "./services";
 
+export const FullBudgetContainer = styled("div")`
+  > div:nth-child(n + 2) {
+    border-top: 1px solid ${theme.colors.gray};
+    margin-bottom: 1em;
+  }
+`;
+
 export const BudgetList = styled("ul")`
   list-style: none;
 `;
@@ -118,14 +125,20 @@ export const BudgetSection = ({
   buttonText,
   sortOnSubtext
 }: Props) => (
-  <div>
+  <React.Fragment>
     <BudgetListRows
       items={items}
       onDelete={onDelete}
       sortOnSubtext={sortOnSubtext}
     />
-    <Button onClick={onAdd} color={theme.colors.primary}>
-      {buttonText}
-    </Button>
-  </div>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Button
+        onClick={onAdd}
+        color={theme.colors.primary}
+        style={{ width: 300 }}
+      >
+        {buttonText}
+      </Button>
+    </div>
+  </React.Fragment>
 );
