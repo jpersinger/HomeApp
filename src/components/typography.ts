@@ -9,7 +9,7 @@ export const Headline1 = styled("p")`
 `;
 
 export const Headline2 = styled("p")`
-  font-size: 1.5em;
+  font-size: 3.5em;
   margin: 0;
   display: inline;
   font-weight: 600;
