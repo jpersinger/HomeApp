@@ -20,10 +20,11 @@ const Navigation = () => {
 
   getId().then(id => {
     setBlah(id);
+    console.log("set blah to", id);
   });
 
   const loginHandler = (googleUser: any) => {
-    console.log(googleUser);
+    console.log("googleuser", googleUser);
   };
 
   return (
