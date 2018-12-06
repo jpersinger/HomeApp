@@ -99,6 +99,6 @@ const Navigation = ({ isAuthenticated }: Props) => {
   );
 };
 
-export default connect(({ home: { isAuthenticated } }: RootState) => {
-  isAuthenticated;
-})(Navigation);
+export default connect(({ home: { isAuthenticated } }: RootState) => ({
+  isAuthenticated
+}))(Navigation);
