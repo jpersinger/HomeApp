@@ -24,3 +24,6 @@ export const getUniqueId = (): string => {
 
 export const formatISOString = (iso: string): string =>
   moment(iso).format("MMM Do, YYYY [at] h:mm a");
+
+export const sortByDate = (iso1: string, iso2: string): number =>
+  moment(iso1).isAfter(iso2) ? 1 : -1;
