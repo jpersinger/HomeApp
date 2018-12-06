@@ -9,6 +9,7 @@ import { Paragraph1 } from "../../../../components/typography";
 import { getUniqueId } from "../../../../services";
 import { Message } from "../../../../services/home_services/home_services.definitions";
 import { addMessage } from "../../../../services/redux/actions/home";
+import { emptyUserData } from "../../../../services/user_data";
 
 interface Props {
   close: () => void;
@@ -58,7 +59,7 @@ const NewReply = ({ parentMessage, close, addMessage }: Props) => {
           onClick={() => {
             addMessage({
               id: getUniqueId(),
-              creator: "TODO",
+              creator: emptyUserData.name,
               message: newReply,
               created: moment().toISOString(),
               parentMessage: !!parentMessage ? parentMessage.id : undefined
