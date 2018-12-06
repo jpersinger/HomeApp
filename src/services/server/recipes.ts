@@ -5,8 +5,7 @@ import { setRecipes } from "../redux/actions/food";
 import { RECIPE_HASH, SERVER_URL } from "./constants";
 
 export const setRecipesInStore = () => {
-  const recipePromise = getRecipes();
-  recipePromise.then(recipes => {
+  getRecipes().then(recipes => {
     store.dispatch(setRecipes(recipes));
   });
 };
@@ -16,7 +15,7 @@ const getRecipes = (): Promise<Recipe[]> =>
     axios
       .get(SERVER_URL + RECIPE_HASH)
       .then(data => {
-        resolve(data.data.recipes);
+        resolve(data.data);
       })
       .catch(err => {
         reject(err);

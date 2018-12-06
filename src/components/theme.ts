@@ -11,7 +11,8 @@ const theme = {
     primaryDark: "#3BC8DB",
     transparentAffirmative: "rgb(56,209,9, 0.07);",
     negative: "#EF3A1A",
-    gray: "#C0CDE2"
+    gray: "#C0CDE2",
+    darkGray: "#5B697F"
   }
 };
 

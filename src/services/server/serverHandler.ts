@@ -1,25 +1,26 @@
 import { setBudgetInStore } from "./budget";
+import { setMessagesInStore } from "./home";
 import { setRecipesInStore } from "./recipes";
 
 class ServerHandler {
   constructor() {
-    this.pullServerData();
+    setMessagesInStore();
+    setRecipesInStore();
+    setBudgetInStore();
   }
 
   intialize() {
     setInterval(() => {
-      // this.pullServerData();
+      setMessagesInStore();
+    }, 10000);
+
+    setInterval(() => {
       setRecipesInStore();
     }, 60000);
 
     setInterval(() => {
       setBudgetInStore();
     }, 20000);
-  }
-
-  pullServerData() {
-    setRecipesInStore();
-    setBudgetInStore();
   }
 }
 

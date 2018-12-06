@@ -26,3 +26,6 @@ export const DELETE_PIGGY_BANK = "DELETE_PIGGY_BANK";
 export const SET_INCOMES = "SET_INCOMES";
 export const ADD_INCOME = "ADD_INCOME";
 export const DELETE_INCOME = "DELETE_INCOME";
+
+export const SET_MESSAGES = "SET_MESSAGES";
+export const ADD_MESSAGE = "ADD_MESSAGE";

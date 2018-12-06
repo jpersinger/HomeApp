@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Button from "../../../components/button";
 import { Input } from "../../../components/inputs";
 import Modal from "../../../components/modal";
-import { getNextIncomeId } from "../../../services/budget_services";
+import { getUniqueId } from "../../../services";
 import { Income } from "../../../services/budget_services/budget.definitions";
 import { addIncome } from "../../../services/redux/actions/budget";
 
@@ -45,7 +45,7 @@ const NewIncomeModal = ({ toggleOpen, addIncome }: Props) => {
       footer={
         <Button
           onClick={() => {
-            addIncome({ amount, dayReceived, id: getNextIncomeId() });
+            addIncome({ amount, dayReceived, id: getUniqueId() });
             toggleOpen();
           }}
           disabled={!amount || !dayReceived}
