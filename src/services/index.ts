@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const getUniqueId = (): string => {
   const s4 = () => {
     return Math.floor((1 + Math.random()) * 0x10000)
@@ -19,3 +21,6 @@ export const getUniqueId = (): string => {
     s4()
   );
 };
+
+export const formatISOString = (iso: string): string =>
+  moment(iso).format("MMM Do, YYYY [at] h:mm a");
