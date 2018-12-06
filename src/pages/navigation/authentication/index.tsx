@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { css } from "react-emotion";
 import { GoogleLogin } from "react-google-login-component";
+import { connect } from "react-redux";
 import Modal from "../../../components/modal";
 import theme from "../../../components/theme";
 import { Headline1 } from "../../../components/typography";
+import { GoogleUser } from "../../../services/home_services/home_services.definitions";
+import { authenticateUser } from "../../../services/redux/actions/home";
 import { getId } from "../../../services/server/home";
 
 const loginClassName = css`
@@ -14,16 +17,21 @@ const loginClassName = css`
   padding: 0.5em;
 `;
 
-const Login = () => {
+interface Props {
+  authenticateUser: (googleUser: GoogleUser) => void;
+}
+
+const Login = ({ authenticateUser }: Props) => {
   const [clientId, setClientId] = useState("");
 
   getId().then(id => {
     setClientId(id);
   });
-  // ofa
-  const loginHandler = (googleUser: any) => {
-    console.log("googleuser", googleUser);
+
+  const loginHandler = (googleUser: GoogleUser) => {
+    authenticateUser(googleUser);
   };
+
   return (
     <Modal
       title="Login"
@@ -55,4 +63,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default connect(
+  null,
+  { authenticateUser }
+)(Login);

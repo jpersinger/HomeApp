@@ -1,9 +1,12 @@
-import { Message } from "../../home_services/home_services.definitions";
-import { ADD_MESSAGE, SET_AUTHENTICATED, SET_MESSAGES } from "../constants";
+import {
+  GoogleUser,
+  Message
+} from "../../home_services/home_services.definitions";
+import { ADD_MESSAGE, AUTHENTICATE_USER, SET_MESSAGES } from "../constants";
 
-export const setAuthenticated = (isAuthenticated: boolean) => ({
-  type: SET_AUTHENTICATED,
-  isAuthenticated
+export const authenticateUser = (googleUser: GoogleUser) => ({
+  type: AUTHENTICATE_USER,
+  googleUser
 });
 
 export const setMessages = (messages: Message[]) => ({
