@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { GoogleLogin } from "react-google-login-component";
+import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import IconButton from "../../components/icon/iconButton";
-import { getId } from "../../services/server/home";
+import { RootState } from "../../services/redux/reducers";
 import Budget from "../budget";
 import Food from "../food";
 import Home from "../home";
+import Login from "./authentication";
 import { linkStyles, ListStyle, NavContainer } from "./components";
 
 enum PATH_MAP {
@@ -14,18 +15,12 @@ enum PATH_MAP {
   food = "/food"
 }
 
-const Navigation = () => {
+interface Props {
+  isAuthenticated: boolean;
+}
+
+const Navigation = ({ isAuthenticated }: Props) => {
   const [open, toggleOpen] = useState(false);
-  const [blah, setBlah] = useState("");
-
-  getId().then(id => {
-    setBlah(id);
-    console.log("set blah to", id);
-  });
-
-  const loginHandler = (googleUser: any) => {
-    console.log("googleuser", googleUser);
-  };
 
   return (
     <Router>
@@ -39,16 +34,6 @@ const Navigation = () => {
           }}
         />
 
-        {blah && (
-          <GoogleLogin
-            socialId={blah}
-            scope="profile"
-            prompt="select_account"
-            fetchBasicProfile
-            responseHandler={loginHandler}
-            buttonText="Login with Google"
-          />
-        )}
         {open && (
           <NavContainer>
             <ListStyle>
@@ -108,8 +93,12 @@ const Navigation = () => {
         <Route path={PATH_MAP.budget} component={Budget} />
         <Route path={PATH_MAP.food} component={Food} />
       </div>
+
+      {!isAuthenticated && <Login />}
     </Router>
   );
 };
 
-export default Navigation;
+export default connect(({ home: { isAuthenticated } }: RootState) => {
+  isAuthenticated;
+})(Navigation);

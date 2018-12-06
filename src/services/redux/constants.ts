@@ -1,3 +1,5 @@
+export const SET_AUTHENTICATED = "SET_AUTHENTICATED";
+
 export const TOGGLE_RECIPE = "TOGGLE_RECIPE";
 export const CLEAR_RECIPES = "CLEAR_RECIPES";
 export const ADD_RECIPE = "ADD_RECIPE";
