@@ -14,7 +14,7 @@ export const setMessagesInStore = () => {
   });
 };
 
-const getId = (): Promise<string> =>
+export const getId = (): Promise<string> =>
   new Promise((resolve, reject) => {
     axios
       .get(SERVER_URL + "/test")

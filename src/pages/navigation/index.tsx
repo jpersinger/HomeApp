@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { GoogleLogin } from "react-google-login-component";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import IconButton from "../../components/icon/iconButton";
+import { getId } from "../../services/server/home";
 import Budget from "../budget";
 import Food from "../food";
 import Home from "../home";
@@ -15,6 +16,11 @@ enum PATH_MAP {
 
 const Navigation = () => {
   const [open, toggleOpen] = useState(false);
+  const [blah, setBlah] = useState("");
+
+  getId().then(id => {
+    setBlah(id);
+  });
 
   const loginHandler = (googleUser: any) => {
     console.log(googleUser);
@@ -32,16 +38,16 @@ const Navigation = () => {
           }}
         />
 
-        {console.log(process.env)}
-
-        <GoogleLogin
-          socialId={process.env.GOOGLE_CLIENT_ID}
-          scope="profile"
-          prompt="select_account"
-          fetchBasicProfile
-          responseHandler={loginHandler}
-          buttonText="Login with Google"
-        />
+        {blah && (
+          <GoogleLogin
+            socialId={blah}
+            scope="profile"
+            prompt="select_account"
+            fetchBasicProfile
+            responseHandler={loginHandler}
+            buttonText="Login with Google"
+          />
+        )}
         {open && (
           <NavContainer>
             <ListStyle>
