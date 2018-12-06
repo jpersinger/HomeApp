@@ -32,6 +32,8 @@ const Navigation = () => {
           }}
         />
 
+        {console.log(process.env)}
+
         <GoogleLogin
           socialId={process.env.GOOGLE_CLIENT_ID}
           scope="profile"
