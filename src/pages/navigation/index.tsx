@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { GoogleLogin } from "react-google-login-component";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import IconButton from "../../components/icon/iconButton";
 import Budget from "../budget";
@@ -15,6 +16,10 @@ enum PATH_MAP {
 const Navigation = () => {
   const [open, toggleOpen] = useState(false);
 
+  const loginHandler = (googleUser: any) => {
+    console.log(googleUser);
+  };
+
   return (
     <Router>
       <div>
@@ -25,6 +30,15 @@ const Navigation = () => {
           onClick={() => {
             toggleOpen(true);
           }}
+        />
+
+        <GoogleLogin
+          socialId={process.env.GOOGLE_CLIENT_ID}
+          scope="profile"
+          prompt="select_account"
+          fetchBasicProfile
+          responseHandler={loginHandler}
+          buttonText="Login with Google"
         />
         {open && (
           <NavContainer>
