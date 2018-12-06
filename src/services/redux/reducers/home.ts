@@ -38,8 +38,10 @@ export default (state = initialState, action: any) =>
         break;
 
       case ADD_MESSAGE:
-        sendNewMessage(action.message);
-        newState.allMessages.push(action.message);
+        const message: Message = action.message;
+        message.creator = state.googleUser.w3.ofa;
+        sendNewMessage(message);
+        newState.allMessages.push(message);
         break;
     }
   });

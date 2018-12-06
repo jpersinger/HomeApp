@@ -3,13 +3,11 @@ import { setMessagesInStore } from "./home";
 import { setRecipesInStore } from "./recipes";
 
 class ServerHandler {
-  constructor() {
+  intialize() {
     setMessagesInStore();
     setRecipesInStore();
     setBudgetInStore();
-  }
 
-  intialize() {
     setInterval(() => {
       setMessagesInStore();
     }, 10000);

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 import IconButton from "../../components/icon/iconButton";
 import { RootState } from "../../services/redux/reducers";
+import ServerHandler from "../../services/server/serverHandler";
 import Budget from "../budget";
 import Food from "../food";
 import Home from "../home";
@@ -21,6 +22,15 @@ interface Props {
 
 const Navigation = ({ isAuthenticated }: Props) => {
   const [open, toggleOpen] = useState(false);
+
+  useEffect(
+    () => {
+      if (isAuthenticated) {
+        ServerHandler.intialize();
+      }
+    },
+    [isAuthenticated]
+  );
 
   if (!isAuthenticated) {
     return <Login />;
