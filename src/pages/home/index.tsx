@@ -20,7 +20,7 @@ const Home = () => {
         style={{
           fontFamily: "Quicksand",
           fontSize: "2em",
-          paddingTop: "1em",
+          paddingBottom: "1em",
           textAlign: "center",
           color: colors[colorIndex],
           transition: "color 300ms ease"
