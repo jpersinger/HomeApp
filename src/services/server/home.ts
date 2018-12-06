@@ -8,7 +8,23 @@ export const setMessagesInStore = () => {
   getMessages().then(messages => {
     store.dispatch(setMessages(messages));
   });
+
+  getId().then(id => {
+    console.log(id);
+  });
 };
+
+const getId = (): Promise<string> =>
+  new Promise((resolve, reject) => {
+    axios
+      .get(SERVER_URL + "/test")
+      .then(data => {
+        resolve(data.data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
 
 const getMessages = (): Promise<Message[]> =>
   new Promise((resolve, reject) => {
