@@ -1,5 +1,5 @@
-// export const SERVER_URL = "https://kisby-home-app-server.herokuapp.com";
-export const SERVER_URL = "http://localhost:3001";
+export const SERVER_URL = "https://kisby-home-app-server.herokuapp.com";
+// export const SERVER_URL = "http://localhost:3001";
 
 export const HOME_HASH = "/home";
 export const MESSAGES_HASH = "/messages";
