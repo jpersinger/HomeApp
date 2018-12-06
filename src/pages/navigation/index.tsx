@@ -22,6 +22,10 @@ interface Props {
 const Navigation = ({ isAuthenticated }: Props) => {
   const [open, toggleOpen] = useState(false);
 
+  if (!isAuthenticated) {
+    return <Login />;
+  }
+
   return (
     <Router>
       <div>
@@ -93,8 +97,6 @@ const Navigation = ({ isAuthenticated }: Props) => {
         <Route path={PATH_MAP.budget} component={Budget} />
         <Route path={PATH_MAP.food} component={Food} />
       </div>
-
-      {!isAuthenticated && <Login />}
     </Router>
   );
 };
