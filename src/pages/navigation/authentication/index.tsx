@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import Modal from "../../../components/modal";
 import theme from "../../../components/theme";
 import { Headline1 } from "../../../components/typography";
-import { GoogleUser } from "../../../services/home_services/home_services.definitions";
-import { authenticateUser } from "../../../services/redux/actions/home";
+import { authenticateUser } from "../../../services/redux/actions/settings";
 import { getId } from "../../../services/server/home";
+import { GoogleUser } from "../../../services/settings_services/settings_services.definitions";
 
 const loginClassName = css`
   background-color: ${theme.colors.secondary};

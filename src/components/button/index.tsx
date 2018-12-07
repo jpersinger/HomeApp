@@ -5,8 +5,14 @@ const Button = styled("button")<{
   color?: string;
   textOnly?: boolean;
   fontSize?: number | string;
+  textColor?: string;
 }>(
-  ({ color = theme.colors.affirmative, textOnly, fontSize = "1em" }) => `
+  ({
+    color = theme.colors.affirmative,
+    textOnly,
+    fontSize = "1em",
+    textColor = theme.colors.secondary
+  }) => `
   font-size: ${fontSize};
   font-family: Quicksand;
   height: 2.4em;
@@ -14,7 +20,7 @@ const Button = styled("button")<{
   width: ${textOnly ? "" : "100%"};
   border-radius: 0.5em;
   background-color: ${textOnly ? "transparent" : color};
-  color: ${textOnly ? theme.colors.secondary : theme.colors.white};
+  color: ${textOnly ? textColor : theme.colors.white};
   cursor: pointer;
   white-space: nowrap;
   font-weight: ${textOnly ? 600 : 500};
