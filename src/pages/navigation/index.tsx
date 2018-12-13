@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import IconButton from "../../components/icon/iconButton";
 import { getUniqueId } from "../../services";
 import { RootState } from "../../services/redux/reducers";
@@ -12,14 +12,8 @@ import Food from "../food";
 import Home from "../home";
 import Settings from "../settings";
 import Login from "./authentication";
-import { linkStyles, ListStyle, NavContainer } from "./components";
-
-enum PATH_MAP {
-  home = "/",
-  budget = "/budget",
-  food = "/food",
-  settings = "/settings"
-}
+import { PATH_MAP } from "./constants";
+import Drawer from "./drawer";
 
 const Navigation = ({ isAuthenticated, user }: SettingsState) => {
   const [open, toggleOpen] = useState(false);
@@ -53,76 +47,12 @@ const Navigation = ({ isAuthenticated, user }: SettingsState) => {
           }}
         />
 
-        {open && (
-          <NavContainer>
-            <ListStyle>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  paddingRight: "1em"
-                }}
-              >
-                <IconButton
-                  name="close"
-                  size={30}
-                  onClick={() => {
-                    toggleOpen(false);
-                  }}
-                />
-              </div>
-              <li>
-                <Link
-                  className={linkStyles}
-                  to={PATH_MAP.home}
-                  onClick={() => {
-                    toggleOpen(false);
-                  }}
-                >
-                  HOME
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className={linkStyles}
-                  to={PATH_MAP.budget}
-                  onClick={() => {
-                    toggleOpen(false);
-                  }}
-                >
-                  BUDGET
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className={linkStyles}
-                  to={PATH_MAP.food}
-                  onClick={() => {
-                    toggleOpen(false);
-                  }}
-                >
-                  FOOD
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className={linkStyles}
-                  to={PATH_MAP.settings}
-                  onClick={() => {
-                    toggleOpen(false);
-                  }}
-                >
-                  SETTINGS
-                </Link>
-              </li>
-            </ListStyle>
-          </NavContainer>
-        )}
+        <Drawer open={open} toggleOpen={toggleOpen} />
 
-        <Route exact path={PATH_MAP.home} component={Home} />
-        <Route path={PATH_MAP.budget} component={Budget} />
-        <Route path={PATH_MAP.food} component={Food} />
-        <Route path={PATH_MAP.settings} component={Settings} />
+        <Route exact path={"/" + PATH_MAP.home} component={Home} />
+        <Route path={"/" + PATH_MAP.budget} component={Budget} />
+        <Route path={"/" + PATH_MAP.food} component={Food} />
+        <Route path={"/" + PATH_MAP.settings} component={Settings} />
       </div>
     </Router>
   );

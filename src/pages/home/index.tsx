@@ -1,33 +1,30 @@
-import React, { useState } from "react";
+import { uniqueId } from "lodash";
+import React from "react";
+import { animated, useTrail } from "react-spring/hooks";
+import { WelcomeHomeContainer } from "./components";
 import MessageBoard from "./messageBoard";
 
-const colors = ["#38D15A", "#030F3D", "#F46A41", "#41DFF4", "#3BC8DB"];
+const WELCOME_HOME_MESSAGE = "Welcome Home!";
 
 const Home = () => {
-  const [colorIndex, setColorIndex] = useState(0);
-
-  setInterval(() => {
-    if (colorIndex === colors.length - 1) {
-      setColorIndex(0);
-    } else {
-      setColorIndex(colorIndex + 1);
-    }
-  }, 1000);
+  const welcomeHomeMap = [...WELCOME_HOME_MESSAGE].map(letter => ({
+    key: uniqueId(),
+    letter
+  }));
+  const welcomeHomeProps = useTrail(welcomeHomeMap.length, {
+    opacity: 1,
+    from: { opacity: 0 }
+  });
 
   return (
     <React.Fragment>
-      <div
-        style={{
-          fontFamily: "Quicksand",
-          fontSize: "2em",
-          paddingBottom: "1em",
-          textAlign: "center",
-          color: colors[colorIndex],
-          transition: "color 300ms ease"
-        }}
-      >
-        Welcome Home!
-      </div>
+      <WelcomeHomeContainer>
+        {welcomeHomeMap.map((item, index) => (
+          <animated.span key={item.key} style={welcomeHomeProps[index]}>
+            {item.letter}
+          </animated.span>
+        ))}
+      </WelcomeHomeContainer>
       <MessageBoard />
     </React.Fragment>
   );

@@ -6,7 +6,7 @@ import theme from "../../../components/theme";
 import { sortByDate } from "../../../services";
 import { Message } from "../../../services/home_services/home_services.definitions";
 import { RootState } from "../../../services/redux/reducers";
-import { AddMessageContainer } from "./components";
+import { AddMessageContainer, MessageContainer } from "./components";
 import NewReply from "./messageRow/newReply";
 import SingleMessageChain from "./singleMessageChain";
 
@@ -27,7 +27,7 @@ const MessageBoard = ({ allMessages }: Props) => {
 
   return (
     <React.Fragment>
-      <div style={{ width: "80vw", minWidth: 350, marginLeft: "10vw" }}>
+      <MessageContainer>
         {topLevelMessages.map(message => (
           <div key={message.id} style={{ marginBottom: "1em" }}>
             <SingleMessageChain
@@ -36,7 +36,7 @@ const MessageBoard = ({ allMessages }: Props) => {
             />
           </div>
         ))}
-      </div>
+      </MessageContainer>
 
       <AddMessageContainer>
         <IconButton
