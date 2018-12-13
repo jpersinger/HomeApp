@@ -1,7 +1,6 @@
+import { castArray, isBoolean } from "lodash";
 import React, { useState } from "react";
-import { isArray } from "util";
 import Button from "../button";
-import IconButton from "../icon/iconButton";
 import theme from "../theme";
 import { Paragraph1, Paragraph3 } from "../typography";
 import {
@@ -21,6 +20,8 @@ interface Props {
   toggle?: () => void;
   add?: (newValue: string) => void;
   discludeFirstFromEditingOptions?: boolean;
+  keys?: string[];
+  selectedValues?: boolean[];
 }
 
 const FormHelper = (props: Props) => {
@@ -28,14 +29,17 @@ const FormHelper = (props: Props) => {
     header,
     subHeader,
     values,
-    toggle,
     add,
     edit,
     onDelete,
-    discludeFirstFromEditingOptions
+    discludeFirstFromEditingOptions,
+    keys,
+    selectedValues
   } = props;
 
   const [addEnabled, setAddEnabled] = useState(false);
+
+  const arr = castArray(values);
 
   return (
     <FormContainer hasSubHeader={!!subHeader}>
@@ -46,50 +50,28 @@ const FormHelper = (props: Props) => {
       <div />
       <FormChildrenContainer>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {!toggle ? (
-            isArray(values) ? (
-              values.map((value, index) => (
-                <FormItem
-                  key={value}
-                  {...props}
-                  edit={
-                    edit && (!discludeFirstFromEditingOptions || !!index)
-                      ? edit
-                      : undefined
-                  }
-                  onDelete={
-                    onDelete && (!discludeFirstFromEditingOptions || !!index)
-                      ? () => {
-                          onDelete(value);
-                        }
-                      : undefined
-                  }
-                >
-                  {value}
-                </FormItem>
-              ))
-            ) : (
-              <FormItem
-                {...props}
-                onDelete={
-                  onDelete
-                    ? () => {
-                        onDelete(values);
-                      }
-                    : undefined
-                }
-              >
-                {values}
-              </FormItem>
-            )
-          ) : (
-            <IconButton
-              name={values ? "filled-checkbox" : "empty-checkbox"}
-              fill={values ? theme.colors.affirmative : "#000000"}
-              size={30}
-              onClick={toggle}
-            />
-          )}
+          {arr.map((value, index) => (
+            <FormItem
+              key={keys ? keys[index] : value}
+              {...props}
+              selected={selectedValues ? selectedValues[index] : value}
+              row={values.length > 1}
+              edit={
+                edit && (!discludeFirstFromEditingOptions || !!index)
+                  ? edit
+                  : undefined
+              }
+              onDelete={
+                onDelete && (!discludeFirstFromEditingOptions || !!index)
+                  ? () => {
+                      onDelete(value);
+                    }
+                  : undefined
+              }
+            >
+              {isBoolean(value) ? "" : value}
+            </FormItem>
+          ))}
           {add &&
             (addEnabled ? (
               <AddAndSave

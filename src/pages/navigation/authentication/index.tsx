@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { css } from "react-emotion";
 import { GoogleLogin } from "react-google-login-component";
 import { connect } from "react-redux";
@@ -18,6 +18,8 @@ const loginClassName = css`
   padding: 0.5em;
 `;
 
+const IN_PROGRESS_CLIENT_ID = "in_progress";
+
 interface Props {
   authenticateUser: (googleUser: GoogleUser) => void;
 }
@@ -25,8 +27,13 @@ interface Props {
 const Login = ({ authenticateUser }: Props) => {
   const [clientId, setClientId] = useState("");
 
-  getId().then(id => {
-    setClientId(id);
+  useEffect(() => {
+    if (!clientId) {
+      setClientId(IN_PROGRESS_CLIENT_ID);
+      getId().then(id => {
+        setClientId(id);
+      });
+    }
   });
 
   const loginHandler = (googleUser: GoogleUser) => {
@@ -39,7 +46,7 @@ const Login = ({ authenticateUser }: Props) => {
       close={() => {}}
       content={
         <LoginModalContainer>
-          {clientId ? (
+          {clientId && clientId !== IN_PROGRESS_CLIENT_ID ? (
             <GoogleLogin
               socialId={clientId}
               className={loginClassName}

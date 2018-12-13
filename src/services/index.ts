@@ -1,4 +1,13 @@
 import moment from "moment";
+import ServerHandler from "./server/serverHandler";
+
+const TEST_ID = "7f1857cd-8abe-2467-17f0-b601823dad66";
+
+export const handleAuthentication = (id: string) => {
+  console.log("initializing", id);
+  ServerHandler.userId = TEST_ID;
+  ServerHandler.initialize();
+};
 
 export const getUniqueId = (): string => {
   const s4 = () => {
@@ -39,3 +48,10 @@ export const sortByDate = (
     : -1;
 
 export const timeout = (ms: number) => new Promise(res => setTimeout(res, ms));
+
+const format = "YYYY-MM-DD";
+export const areDatesOnSameDay = (iso1: string, iso2: string): boolean =>
+  moment(iso1, format).isSame(moment(iso2, format));
+
+export const isDateToday = (iso: string): boolean =>
+  areDatesOnSameDay(moment().toISOString(), iso);

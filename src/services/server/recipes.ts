@@ -1,4 +1,4 @@
-import axios from "axios";
+import { sendGetRequest, sendPostRequest } from ".";
 import { Recipe } from "../food_services/food.definitions";
 import store from "../redux";
 import { setRecipes } from "../redux/actions/food";
@@ -11,20 +11,8 @@ export const setRecipesInStore = () => {
 };
 
 const getRecipes = (): Promise<Recipe[]> =>
-  new Promise((resolve, reject) => {
-    axios
-      .get(SERVER_URL + RECIPE_HASH)
-      .then(data => {
-        resolve(data.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+  sendGetRequest<Recipe[]>(RECIPE_HASH);
 
 export const sendNewRecipe = (recipe: Recipe) => {
-  console.log("sending", recipe);
-  axios.post(SERVER_URL + RECIPE_HASH, JSON.stringify(recipe), {
-    headers: { "Content-Type": "application/json" }
-  });
+  sendPostRequest(SERVER_URL + RECIPE_HASH, JSON.stringify(recipe));
 };

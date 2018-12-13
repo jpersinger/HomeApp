@@ -1,6 +1,6 @@
-import axios from "axios";
-import { isEmpty } from "lodash";
-import { sendPostRequest } from ".";
+import { cloneDeep, isEmpty } from "lodash";
+import { sendGetRequest, sendPostRequest } from ".";
+import { getUniqueId } from "..";
 import store from "../redux";
 import { setUserData } from "../redux/actions/settings";
 import { UserData } from "../settings_services/settings_services.definitions";
@@ -8,60 +8,65 @@ import {
   DISPLAY_NAME_URL,
   LINKED_EMAILS_URL,
   PUSH_NOTIFICATIONS_URL,
-  SERVER_URL,
   SETTINGS_HASH,
   TEXT_COLOR_URL
 } from "./constants";
 
 export const setUserDataInStore = (user: UserData) => {
-  getUserData(user).then(userData => {
-    store.dispatch(setUserData(userData));
-    if (isEmpty(userData)) {
-      sendNewUser({ ...user, displayName: user.firstName });
-    }
-  });
+  getUserData(user)
+    .then(userData => {
+      let fullUserData = cloneDeep(userData);
+      if (isEmpty(fullUserData)) {
+        fullUserData = {
+          ...user,
+          displayName: user.firstName,
+          id: getUniqueId()
+        };
+        sendNewUser(fullUserData);
+      }
+      store.dispatch(setUserData(fullUserData));
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };
 
 const getUserData = (user: UserData): Promise<UserData> =>
-  new Promise((resolve, reject) => {
-    axios
-      .get(SERVER_URL + SETTINGS_HASH, { params: { user } })
-      .then(data => {
-        resolve(data.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
+  sendGetRequest<UserData>(SETTINGS_HASH, undefined, {
+    user: { ...user, pushNotificationsEnabled: undefined }
   });
 
 export const sendNewUser = (user: UserData) => {
-  console.log("sending", user);
-  axios.post(SERVER_URL + SETTINGS_HASH, JSON.stringify(user), {
-    headers: { "Content-Type": "application/json" }
-  });
+  sendPostRequest(SETTINGS_HASH, JSON.stringify(user));
 };
 
 export const sendDisplayName = (id: string, displayName: string) => {
-  sendPostRequest(DISPLAY_NAME_URL, { id, displayName });
+  sendPostRequest(DISPLAY_NAME_URL, JSON.stringify({ id, displayName }));
 };
 
 export const sendTextColor = (id: string, textColor: string) => {
-  sendPostRequest(TEXT_COLOR_URL, { id, textColor });
+  sendPostRequest(TEXT_COLOR_URL, JSON.stringify({ id, textColor }));
 };
 
 export const sendLinkedEmails = (id: string, linkedEmails: string[]) => {
-  sendPostRequest(LINKED_EMAILS_URL, {
-    id,
-    linkedEmails: linkedEmails || []
-  });
+  sendPostRequest(
+    LINKED_EMAILS_URL,
+    JSON.stringify({
+      id,
+      linkedEmails: linkedEmails || []
+    })
+  );
 };
 
 export const sendPushNotificationsEnabled = (
   id: string,
   pushNotificationsEnabled: boolean
 ) => {
-  sendPostRequest(PUSH_NOTIFICATIONS_URL, {
-    id,
-    pushNotificationsEnabled
-  });
+  sendPostRequest(
+    PUSH_NOTIFICATIONS_URL,
+    JSON.stringify({
+      id,
+      pushNotificationsEnabled
+    })
+  );
 };

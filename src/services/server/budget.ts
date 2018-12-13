@@ -1,7 +1,8 @@
-import axios from "axios";
 import { isString } from "lodash";
+import { sendDeleteRequest, sendGetRequest, sendPostRequest } from ".";
 import {
   GeneralBudget,
+  Income,
   MonthlyExpense,
   PiggyBank
 } from "../budget_services/budget.definitions";
@@ -43,7 +44,7 @@ export const setBudgetInStore = () => {
 };
 
 // GENERAL BUDGET
-const cleanBudgetData = (data: any): GeneralBudget => {
+const cleanBudgetData = (data: GeneralBudget): GeneralBudget => {
   const generalBudget: GeneralBudget = {
     general: {
       bankAmount: 0
@@ -79,126 +80,70 @@ const cleanBudgetData = (data: any): GeneralBudget => {
 };
 
 export const getGeneralBudget = (): Promise<GeneralBudget> =>
-  new Promise((resolve, reject) => {
-    axios
-      .get(SERVER_URL + GENERAL_BUDGET_URL)
-      .then(data => {
-        resolve(cleanBudgetData(data.data));
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+  sendGetRequest<GeneralBudget>(GENERAL_BUDGET_URL, cleanBudgetData);
 
 export const sendUpdateGeneralBankInfo = (amount: number) => {
-  console.log("sending", amount);
-  axios.post(SERVER_URL + GENERAL_BUDGET_POST_URL, JSON.stringify({ amount }), {
-    headers: { "Content-Type": "application/json" }
-  });
+  sendPostRequest(
+    SERVER_URL + GENERAL_BUDGET_POST_URL,
+    JSON.stringify({ amount })
+  );
 };
 
 export const sendUpdateCreditCardInfo = (
   type: "Julie" | "Bryan",
   amount: number
 ) => {
-  console.log("sending", amount);
-  axios.post(
+  const hash =
     SERVER_URL +
-      (type === "Julie"
-        ? GENERAL_BUDGET_JULIE_CREDIT_URL
-        : GENERAL_BUDGET_BRYAN_CREDIT_URL),
-    JSON.stringify({ amount }),
-    {
-      headers: { "Content-Type": "application/json" }
-    }
-  );
+    (type === "Julie"
+      ? GENERAL_BUDGET_JULIE_CREDIT_URL
+      : GENERAL_BUDGET_BRYAN_CREDIT_URL);
+  sendPostRequest(hash, JSON.stringify({ amount }));
 };
 
 // MONTHLY EXPENSES
 const getMonthlyExpenses = (): Promise<MonthlyExpense[]> =>
-  new Promise((resolve, reject) => {
-    axios
-      .get(SERVER_URL + BUDGET_HASH + MONTHLY_EXPENSES_HASH)
-      .then(data => {
-        resolve(data.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+  sendGetRequest<MonthlyExpense[]>(BUDGET_HASH + MONTHLY_EXPENSES_HASH);
 
 export const sendNewMonthlyExpense = (monthlyExpense: MonthlyExpense) => {
-  console.log("sending", monthlyExpense);
-  axios.post(
+  sendPostRequest(
     SERVER_URL + BUDGET_HASH + MONTHLY_EXPENSES_HASH,
-    JSON.stringify(monthlyExpense),
-    {
-      headers: { "Content-Type": "application/json" }
-    }
+    JSON.stringify(monthlyExpense)
   );
 };
 
 export const sendDeleteMonthlyExpense = (title: string) => {
-  console.log("deleting", title);
-  axios.delete(SERVER_URL + BUDGET_HASH + MONTHLY_EXPENSES_HASH, {
-    params: { title }
+  sendDeleteRequest(SERVER_URL + BUDGET_HASH + MONTHLY_EXPENSES_HASH, {
+    title
   });
 };
 
 // PIGGY BANKS
 const getPiggyBanks = (): Promise<PiggyBank[]> =>
-  new Promise((resolve, reject) => {
-    axios
-      .get(SERVER_URL + BUDGET_HASH + PIGGY_BANKS_HASH)
-      .then(data => {
-        resolve(data.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+  sendGetRequest<PiggyBank[]>(BUDGET_HASH + PIGGY_BANKS_HASH);
 
 export const sendNewPiggyBank = (piggyBank: PiggyBank) => {
-  console.log("sending", piggyBank);
-  axios.post(
+  sendPostRequest(
     SERVER_URL + BUDGET_HASH + PIGGY_BANKS_HASH,
-    JSON.stringify(piggyBank),
-    {
-      headers: { "Content-Type": "application/json" }
-    }
+    JSON.stringify(piggyBank)
   );
 };
 
 export const sendDeletePiggyBank = (title: string) => {
-  console.log("deleting", title);
-  axios.delete(SERVER_URL + BUDGET_HASH + PIGGY_BANKS_HASH, {
-    params: { title }
-  });
+  sendDeleteRequest(SERVER_URL + BUDGET_HASH + PIGGY_BANKS_HASH, { title });
 };
 
 // INCOMES
-export const getIncomes = (): Promise<any[]> =>
-  new Promise((resolve, reject) => {
-    axios
-      .get(SERVER_URL + BUDGET_HASH + INCOME_HASH)
-      .then(data => {
-        resolve(data.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+export const getIncomes = (): Promise<Income[]> =>
+  sendGetRequest<Income[]>(BUDGET_HASH + INCOME_HASH);
 
 export const sendNewIncome = (income: any) => {
-  console.log("sending", income);
-  axios.post(SERVER_URL + BUDGET_HASH + INCOME_HASH, JSON.stringify(income), {
-    headers: { "Content-Type": "application/json" }
-  });
+  sendPostRequest(
+    SERVER_URL + BUDGET_HASH + INCOME_HASH,
+    JSON.stringify(income)
+  );
 };
 
 export const sendDeleteIncome = (id: string) => {
-  console.log("deleting", id);
-  axios.delete(SERVER_URL + BUDGET_HASH + INCOME_HASH, {
-    params: { id }
-  });
+  sendDeleteRequest(SERVER_URL + BUDGET_HASH + INCOME_HASH, { id });
 };

@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import IconButton from "../../components/icon/iconButton";
-import { getUniqueId } from "../../services";
+import { handleAuthentication } from "../../services";
 import { RootState } from "../../services/redux/reducers";
 import { SettingsState } from "../../services/redux/reducers/settings";
-import ServerHandler from "../../services/server/serverHandler";
-import { setUserDataInStore } from "../../services/server/settings";
 import Budget from "../budget";
 import Food from "../food";
 import Home from "../home";
@@ -15,24 +13,15 @@ import Login from "./authentication";
 import { PATH_MAP } from "./constants";
 import Drawer from "./drawer";
 
-const Navigation = ({ isAuthenticated, user }: SettingsState) => {
+const getLinkPath = (path: PATH_MAP) => "/" + path;
+
+const Navigation = ({ isAuthenticated }: SettingsState) => {
   const [open, toggleOpen] = useState(false);
 
-  useEffect(
-    () => {
-      if (isAuthenticated) {
-        ServerHandler.intialize();
-      }
-    },
-    [isAuthenticated]
-  );
+  handleAuthentication("");
 
   if (!isAuthenticated) {
     return <Login />;
-  }
-
-  if (isAuthenticated && !user.displayName) {
-    setUserDataInStore({ ...user, id: getUniqueId() });
   }
 
   return (

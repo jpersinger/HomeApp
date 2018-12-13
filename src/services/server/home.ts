@@ -1,4 +1,4 @@
-import axios from "axios";
+import { sendGetRequest, sendPostRequest } from ".";
 import { Message } from "../home_services/home_services.definitions";
 import store from "../redux";
 import { setMessages } from "../redux/actions/home";
@@ -10,33 +10,11 @@ export const setMessagesInStore = () => {
   });
 };
 
-export const getId = (): Promise<string> =>
-  new Promise((resolve, reject) => {
-    axios
-      .get(SERVER_URL + "/test")
-      .then(data => {
-        resolve(data.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+export const getId = (): Promise<string> => sendGetRequest<string>("/test");
 
 const getMessages = (): Promise<Message[]> =>
-  new Promise((resolve, reject) => {
-    axios
-      .get(SERVER_URL + MESSAGES_URL)
-      .then(data => {
-        resolve(data.data);
-      })
-      .catch(err => {
-        reject(err);
-      });
-  });
+  sendGetRequest<Message[]>(MESSAGES_URL);
 
 export const sendNewMessage = (message: Message) => {
-  console.log("sending", message);
-  axios.post(SERVER_URL + MESSAGES_URL, JSON.stringify(message), {
-    headers: { "Content-Type": "application/json" }
-  });
+  sendPostRequest(SERVER_URL + MESSAGES_URL, JSON.stringify(message));
 };

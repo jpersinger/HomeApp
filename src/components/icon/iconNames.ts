@@ -6,7 +6,8 @@ const names = {
   "empty-checkbox": true,
   "filled-checkbox": true,
   edit: true,
-  delete: true
+  delete: true,
+  circle: true
 };
 
 // This is used instead of an enum to allow e.g. `<Icon name="trash" />` over

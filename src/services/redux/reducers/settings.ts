@@ -6,10 +6,7 @@ import {
   sendTextColor
 } from "../../server/settings";
 import { emptyUser } from "../../settings_services/constants";
-import {
-  GoogleUser,
-  UserData
-} from "../../settings_services/settings_services.definitions";
+import { UserData } from "../../settings_services/settings_services.definitions";
 import {
   ADD_LINKED_EMAIL,
   AUTHENTICATE_USER,
@@ -35,15 +32,7 @@ export default (state = initialState, action: any) =>
     switch (action.type) {
       case AUTHENTICATE_USER:
         newState.isAuthenticated = true;
-        const googleUser = action.googleUser as GoogleUser;
-        newState.user = {
-          ...emptyUser,
-          email: googleUser.w3.U3,
-          fullName: googleUser.w3.ig,
-          firstName: googleUser.w3.ofa,
-          lastName: googleUser.w3.wea,
-          linkedEmails: [googleUser.w3.U3]
-        };
+        newState.user = action.user;
         break;
 
       case SET_USER_DATA:
