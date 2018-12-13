@@ -26,7 +26,7 @@ export interface SettingsState {
 }
 
 const initialState: SettingsState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   user: emptyUser
 };
 

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { css } from "react-emotion";
 import { GoogleLogin } from "react-google-login-component";
 import { connect } from "react-redux";
+import Loading from "../../../components/animations/loading";
 import Modal from "../../../components/modal";
 import theme from "../../../components/theme";
-import { Headline1 } from "../../../components/typography";
 import { authenticateUser } from "../../../services/redux/actions/settings";
 import { getId } from "../../../services/server/home";
 import { GoogleUser } from "../../../services/settings_services/settings_services.definitions";
+import { LoginModalContainer } from "./components";
 
 const loginClassName = css`
   background-color: ${theme.colors.secondary};
@@ -37,14 +38,8 @@ const Login = ({ authenticateUser }: Props) => {
       title="Login"
       close={() => {}}
       content={
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            paddingTop: "2em"
-          }}
-        >
-          {!!clientId ? (
+        <LoginModalContainer>
+          {clientId ? (
             <GoogleLogin
               socialId={clientId}
               className={loginClassName}
@@ -55,9 +50,11 @@ const Login = ({ authenticateUser }: Props) => {
               buttonText="Login with Google"
             />
           ) : (
-            <Headline1>Fetching id</Headline1>
+            <Loading
+              colorOptions={[theme.colors.secondary, theme.colors.primary]}
+            />
           )}
-        </div>
+        </LoginModalContainer>
       }
     />
   );
