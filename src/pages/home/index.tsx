@@ -1,6 +1,7 @@
 import { uniqueId } from "lodash";
 import React from "react";
 import { animated, useTrail } from "react-spring/hooks";
+import { getRandom } from "../../services/home_services";
 import { WelcomeHomeContainer } from "./components";
 import MessageBoard from "./messageBoard";
 
@@ -15,6 +16,8 @@ const Home = () => {
     opacity: 1,
     from: { opacity: 0 }
   });
+
+  getRandom();
 
   return (
     <React.Fragment>
