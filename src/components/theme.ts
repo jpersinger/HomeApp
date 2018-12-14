@@ -10,6 +10,7 @@ const theme = {
     primary: "#41DFF4",
     primaryDark: "#3BC8DB",
     transparentAffirmative: "rgb(56,209,9, 0.07);",
+    transparentGray: "rgb(192,205,226, 0.07);",
     negative: "#EF3A1A",
     gray: "#C0CDE2",
     darkGray: "#5B697F"

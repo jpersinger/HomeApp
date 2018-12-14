@@ -1,3 +1,6 @@
+import { handleAuthentication } from "../..";
+import { setUserDataInStore } from "../../server/settings";
+import { emptyUser } from "../../settings_services/constants";
 import {
   GoogleUser,
   UserData
@@ -12,15 +15,32 @@ import {
   UPDATE_TEXT_COLOR
 } from "../constants";
 
-export const authenticateUser = (googleUser: GoogleUser) => ({
-  type: AUTHENTICATE_USER,
-  googleUser
-});
+export const authenticateUser = (googleUser: GoogleUser) => {
+  const user: UserData = {
+    ...emptyUser,
+    email: googleUser.w3.U3,
+    fullName: googleUser.w3.ig,
+    firstName: googleUser.w3.ofa,
+    lastName: googleUser.w3.wea,
+    linkedEmails: [googleUser.w3.U3]
+  };
 
-export const setUserData = (user: UserData) => ({
-  type: SET_USER_DATA,
-  user
-});
+  setUserDataInStore(user);
+
+  return {
+    type: AUTHENTICATE_USER,
+    user
+  };
+};
+
+export const setUserData = (user: UserData) => {
+  handleAuthentication(user.id);
+
+  return {
+    type: SET_USER_DATA,
+    user
+  };
+};
 
 export const updateDisplayName = (displayName: string) => ({
   type: UPDATE_DISPLAY_NAME,
