@@ -1,6 +1,5 @@
 import { setBudgetInStore } from "./budget";
 import { setMessagesInStore } from "./home";
-import { setPersonalGoalsInStore } from "./personalGoals";
 import { setRecipesInStore } from "./recipes";
 
 class ServerHandler {
@@ -10,7 +9,7 @@ class ServerHandler {
     setMessagesInStore();
     setRecipesInStore();
     setBudgetInStore();
-    setPersonalGoalsInStore(this.userId);
+    // setPersonalGoalsInStore(this.userId);
 
     setInterval(() => {
       setMessagesInStore();
@@ -19,7 +18,7 @@ class ServerHandler {
     setInterval(() => {
       setRecipesInStore();
       if (this.userId) {
-        setPersonalGoalsInStore(this._userData.id);
+        // setPersonalGoalsInStore(this._userData.id);
       }
     }, 60000);
 
