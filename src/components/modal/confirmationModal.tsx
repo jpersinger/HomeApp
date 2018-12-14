@@ -1,12 +1,14 @@
-import React from "react";
-import styled from "react-emotion";
+import React, { useState } from "react";
+import styled, { css } from "react-emotion";
+import { animated, useSpring } from "react-spring/hooks";
+import { timeout } from "../../services";
 import Button from "../button";
 import FixedPortal from "../fixedPortal";
 import theme from "../theme";
 import { Headline1 } from "../typography";
-import { Overlay } from "./components";
+import { MODAL_ANIMATIONS, MODAL_ANIMATION_DURATION } from "./components";
 
-const ModalContainer = styled("div")`
+const modalContainer = css`
   font-family: Quicksand;
   position: fixed;
   width: 50%;
@@ -43,32 +45,44 @@ const ConfirmationModal = ({
   cancelText,
   confirm,
   close
-}: Props) => (
-  <FixedPortal>
-    <Overlay onClick={close} />
-    <ModalContainer>
-      <ModalTitle>
-        <Headline1>{title}</Headline1>
-      </ModalTitle>
-      <div style={{ padding: "1em" }}>{content}</div>
-      <div style={{ display: "flex", margin: "1em" }}>
-        {!!cancelText && (
-          <Button
-            onClick={close}
-            color={theme.colors.darkBlue}
-            style={{ marginRight: !!confirmationText ? "1em" : 0 }}
-          >
-            {cancelText}
-          </Button>
-        )}
-        {!!confirmationText && (
-          <Button onClick={confirm} color={theme.colors.negative}>
-            {confirmationText}
-          </Button>
-        )}
-      </div>
-    </ModalContainer>
-  </FixedPortal>
-);
+}: Props) => {
+  const [props, setProps] = useSpring(() => MODAL_ANIMATIONS.fadeIn);
+  const [overlayOpen, setOverlayOpen] = useState(true);
+
+  const closeUpShop = async () => {
+    setProps(MODAL_ANIMATIONS.fadeOut);
+    setOverlayOpen(false);
+    await timeout(MODAL_ANIMATION_DURATION);
+    close();
+  };
+
+  return (
+    <FixedPortal>
+      {/* <Overlay open={overlayOpen} duration={MODAL_ANIMATION_DURATION} /> */}
+      <animated.div style={props} className={modalContainer}>
+        <ModalTitle>
+          <Headline1>{title}</Headline1>
+        </ModalTitle>
+        <div style={{ padding: "1em" }}>{content}</div>
+        <div style={{ display: "flex", margin: "1em" }}>
+          {!!cancelText && (
+            <Button
+              onClick={closeUpShop}
+              color={theme.colors.darkBlue}
+              style={{ marginRight: !!confirmationText ? "1em" : 0 }}
+            >
+              {cancelText}
+            </Button>
+          )}
+          {!!confirmationText && (
+            <Button onClick={confirm} color={theme.colors.negative}>
+              {confirmationText}
+            </Button>
+          )}
+        </div>
+      </animated.div>
+    </FixedPortal>
+  );
+};
 
 export default ConfirmationModal;

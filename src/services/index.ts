@@ -37,3 +37,5 @@ export const sortByDate = (
     : moment(iso1).isAfter(iso2)
     ? 1
     : -1;
+
+export const timeout = (ms: number) => new Promise(res => setTimeout(res, ms));

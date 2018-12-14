@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 import { animated, useSpring, useTrail } from "react-spring/hooks";
 import IconButton from "../../../components/icon/iconButton";
+import Overlay from "../../../components/overlay";
 import { PATH_MAP } from "../constants";
 import {
   CloseButtonContainer,
   FADE_ANIMATIONS,
   ListStyle,
   navContainer,
-  NAV_ANIMATIONS,
-  overlay,
-  OVERLAY_ANIMATIONS
+  NAV_ANIMATIONS
 } from "./components";
 import LinkItem from "./linkItem";
 
@@ -27,29 +26,22 @@ const Drawer = ({ open, toggleOpen }: Props) => {
   ];
 
   const [navProps, setNavProps] = useSpring(() => NAV_ANIMATIONS.initial);
-  const [overlayProps, setOverlayProps] = useSpring(
-    () => OVERLAY_ANIMATIONS.initial
-  );
 
   const [fadeProps, setFadeProps] = useTrail(
     links.length,
     () => FADE_ANIMATIONS.initial
   );
 
-  // const [overlayProps, setOverlayProps] = useSpring(
-  //   () => OVERLAY_ANIMATIONS.hide
-  // );
-
   useEffect(
     () => {
       if (open) {
         setNavProps(NAV_ANIMATIONS.slideIn);
         setFadeProps(FADE_ANIMATIONS.fadeIn);
-        setOverlayProps(OVERLAY_ANIMATIONS.slideIn);
+        // setOverlayProps(OVERLAY_ANIMATIONS.slideIn);
       } else {
         setNavProps(NAV_ANIMATIONS.slideOut);
         setFadeProps(FADE_ANIMATIONS.fadeOut);
-        setOverlayProps(OVERLAY_ANIMATIONS.slideOut);
+        // setOverlayProps(OVERLAY_ANIMATIONS.slideOut);
       }
     },
     [open]
@@ -81,13 +73,7 @@ const Drawer = ({ open, toggleOpen }: Props) => {
           </ListStyle>
         </nav>
       </animated.div>
-      <animated.div
-        style={{ ...fadeProps[0], ...overlayProps }}
-        className={overlay}
-        onClick={() => {
-          toggleOpen(false);
-        }}
-      />
+      <Overlay open={open} translate />
     </React.Fragment>
   );
 };

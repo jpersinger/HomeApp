@@ -78,24 +78,3 @@ export const FADE_ANIMATIONS = {
     from: { opacity: 1 }
   }
 };
-
-const OVERLAY_TRANSLATE = "-100vw";
-const OVERLAY_OPACITY = 0.3;
-
-export const OVERLAY_ANIMATIONS = {
-  initial: {
-    transform: `translateX(${OVERLAY_TRANSLATE})`,
-    opacity: 0,
-    from: { transform: `translateX(${OVERLAY_TRANSLATE})`, opacity: 0 }
-  },
-  slideIn: {
-    transform: "translateX(0)",
-    opacity: OVERLAY_OPACITY,
-    from: { transform: `translateX(${OVERLAY_TRANSLATE})`, opacity: 0 }
-  },
-  slideOut: {
-    transform: `translateX(${OVERLAY_TRANSLATE})`,
-    opacity: 0,
-    from: { transform: "translateX(0)", opacity: OVERLAY_OPACITY }
-  }
-};
