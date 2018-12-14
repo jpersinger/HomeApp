@@ -1,7 +1,7 @@
 import { uniqueId } from "lodash";
 import React from "react";
 import { animated, useTrail } from "react-spring/hooks";
-import { getRandom } from "../../services/home_services";
+import BibleVerse from "./bibleVerse";
 import { WelcomeHomeContainer } from "./components";
 import MessageBoard from "./messageBoard";
 
@@ -17,8 +17,6 @@ const Home = () => {
     from: { opacity: 0 }
   });
 
-  getRandom();
-
   return (
     <React.Fragment>
       <WelcomeHomeContainer>
@@ -28,6 +26,7 @@ const Home = () => {
           </animated.span>
         ))}
       </WelcomeHomeContainer>
+      <BibleVerse />
       <MessageBoard />
     </React.Fragment>
   );
