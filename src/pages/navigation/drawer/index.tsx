@@ -73,7 +73,13 @@ const Drawer = ({ open, toggleOpen }: Props) => {
           </ListStyle>
         </nav>
       </animated.div>
-      <Overlay open={open} translate />
+      <Overlay
+        open={open}
+        translate
+        onClick={() => {
+          toggleOpen(false);
+        }}
+      />
     </React.Fragment>
   );
 };

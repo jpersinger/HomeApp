@@ -1,37 +1,21 @@
 import React, { useEffect } from "react";
 import { animated, useSpring } from "react-spring/hooks";
-import {
-  getAnimationSet,
-  overlayClass,
-  OVERLAY_OPACITY,
-  OVERLAY_TRANSLATE
-} from "./components";
+import { getAnimationSet, overlayClass } from "./components";
 
 interface Props {
   open: boolean;
   duration?: number;
   translate?: boolean;
+  onClick?: () => void;
 }
 
-const Overlay = ({ open, duration, translate }: Props) => {
-  const animationSet = getAnimationSet({
-    inValues: {
-      opacity: OVERLAY_OPACITY,
-      transform: `translateX(${translate ? 0 : OVERLAY_TRANSLATE})`
-    },
-    outValues: {
-      transform: `translateX(${translate ? OVERLAY_TRANSLATE : 0})`
-    },
-    duration
-  });
-  console.log(animationSet, open);
-  const [overlayProps, setOverlayProps] = useSpring(() =>
-    open ? animationSet.in : animationSet.out
-  );
+const Overlay = ({ open, duration, translate, onClick }: Props) => {
+  const animationSet = getAnimationSet({ duration, translate });
+
+  const [overlayProps, setOverlayProps] = useSpring(() => animationSet.initial);
 
   useEffect(
     () => {
-      console.log("open", open);
       if (open) {
         setOverlayProps(animationSet.in);
       } else {
@@ -41,7 +25,13 @@ const Overlay = ({ open, duration, translate }: Props) => {
     [open]
   );
 
-  return <animated.div style={overlayProps} className={overlayClass} />;
+  return (
+    <animated.div
+      style={overlayProps}
+      className={overlayClass}
+      onClick={onClick}
+    />
+  );
 };
 
 export default Overlay;

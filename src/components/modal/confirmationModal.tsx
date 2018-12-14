@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import styled, { css } from "react-emotion";
-import { animated, useSpring } from "react-spring/hooks";
-import { timeout } from "../../services";
 import Button from "../button";
-import FixedPortal from "../fixedPortal";
 import theme from "../theme";
 import { Headline1 } from "../typography";
-import { MODAL_ANIMATIONS, MODAL_ANIMATION_DURATION } from "./components";
+import ModalHandler from "./modalHandler";
 
 const modalContainer = css`
   font-family: Quicksand;
@@ -46,20 +43,16 @@ const ConfirmationModal = ({
   confirm,
   close
 }: Props) => {
-  const [props, setProps] = useSpring(() => MODAL_ANIMATIONS.fadeIn);
-  const [overlayOpen, setOverlayOpen] = useState(true);
-
-  const closeUpShop = async () => {
-    setProps(MODAL_ANIMATIONS.fadeOut);
-    setOverlayOpen(false);
-    await timeout(MODAL_ANIMATION_DURATION);
-    close();
-  };
+  const [open, setOpen] = useState(true);
+  const [confirmSelected, setConfirmSelected] = useState(false);
 
   return (
-    <FixedPortal>
-      {/* <Overlay open={overlayOpen} duration={MODAL_ANIMATION_DURATION} /> */}
-      <animated.div style={props} className={modalContainer}>
+    <ModalHandler
+      open={open}
+      onCloseComplete={confirmSelected && confirm ? confirm : close}
+      containerStyles={modalContainer}
+    >
+      <React.Fragment>
         <ModalTitle>
           <Headline1>{title}</Headline1>
         </ModalTitle>
@@ -67,21 +60,29 @@ const ConfirmationModal = ({
         <div style={{ display: "flex", margin: "1em" }}>
           {!!cancelText && (
             <Button
-              onClick={closeUpShop}
+              onClick={() => {
+                setOpen(false);
+              }}
               color={theme.colors.darkBlue}
               style={{ marginRight: !!confirmationText ? "1em" : 0 }}
             >
               {cancelText}
             </Button>
           )}
-          {!!confirmationText && (
-            <Button onClick={confirm} color={theme.colors.negative}>
+          {confirmationText && confirm && (
+            <Button
+              onClick={() => {
+                setOpen(false);
+                setConfirmSelected(true);
+              }}
+              color={theme.colors.negative}
+            >
               {confirmationText}
             </Button>
           )}
         </div>
-      </animated.div>
-    </FixedPortal>
+      </React.Fragment>
+    </ModalHandler>
   );
 };
 

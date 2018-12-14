@@ -1,3 +1,4 @@
+import { isUndefined } from "lodash";
 import { css } from "react-emotion";
 import theme from "../theme";
 
@@ -14,6 +15,7 @@ interface Config {
 }
 
 interface OverlayAnimationSet {
+  initial: OverlayAnimationPoint & { from: OverlayAnimationPoint };
   in: OverlayAnimationPoint & { from: OverlayAnimationPoint } & {
     config: Config;
   };
@@ -23,10 +25,36 @@ interface OverlayAnimationSet {
 }
 
 export const getAnimationSet = ({
+  duration,
+  translate
+}: {
+  duration?: number;
+  translate?: boolean;
+}): OverlayAnimationSet => {
+  const translateIn =
+    isUndefined(translate) || translate ? 0 : OVERLAY_TRANSLATE;
+  const translateOut = !translate ? 0 : OVERLAY_TRANSLATE;
+
+  return getAnimationSetObject({
+    initial: { opacity: 0, transform: `translateX(${translateOut})` },
+    inValues: {
+      opacity: OVERLAY_OPACITY,
+      transform: `translateX(${translateIn})`
+    },
+    outValues: {
+      transform: `translateX("${translateOut}")`
+    },
+    duration
+  });
+};
+
+const getAnimationSetObject = ({
+  initial,
   inValues,
   outValues,
   duration
 }: {
+  initial?: OverlayAnimationPoint;
   inValues?: OverlayAnimationPoint;
   outValues?: OverlayAnimationPoint;
   duration?: number;
@@ -48,40 +76,22 @@ export const getAnimationSet = ({
   }
 
   return {
+    initial: {
+      ...initial,
+      from: initial || {}
+    },
     in: {
       ...inView,
-      from: {
-        ...outOfView
-      },
+      from: outOfView || {},
       config
     },
     out: {
       ...outOfView,
-      from: {
-        ...inView
-      },
+      from: inView || {},
       config
     }
   };
 };
-
-// export const OVERLAY_ANIMATIONS = {
-//   initial: {
-//     transform: `translateX(${OVERLAY_TRANSLATE})`,
-//     opacity: 0,
-//     from: { transform: `translateX(${OVERLAY_TRANSLATE})`, opacity: 0 }
-//   },
-//   slideIn: {
-//     transform: "translateX(0)",
-//     opacity: OVERLAY_OPACITY,
-//     from: { transform: `translateX(${OVERLAY_TRANSLATE})`, opacity: 0 }
-//   },
-//   slideOut: {
-//     transform: `translateX(${OVERLAY_TRANSLATE})`,
-//     opacity: 0,
-//     from: { transform: "translateX(0)", opacity: OVERLAY_OPACITY }
-//   }
-// };
 
 export const overlayClass = css`
   width: 100vw;
@@ -90,5 +100,5 @@ export const overlayClass = css`
   opacity: 0.4;
   position: fixed;
   top: 0;
-  z-index: 2;
+  z-index: 1;
 `;

@@ -13,6 +13,7 @@ interface Props {
 
 const Incomes = ({ incomes, deleteIncome }: Props) => {
   const [newIncomeModalOpen, setNewIncomeModalOpen] = useState(false);
+  console.log(newIncomeModalOpen);
 
   const items = incomes.map(({ amount, dayReceived }) => ({
     title: `Day ${dayReceived}`,
@@ -37,6 +38,7 @@ const Incomes = ({ incomes, deleteIncome }: Props) => {
         <NewIncomeModal
           toggleOpen={() => {
             setNewIncomeModalOpen(false);
+            console.log("closing");
           }}
         />
       )}

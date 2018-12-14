@@ -1,10 +1,9 @@
 import React from "react";
-import styled from "react-emotion";
-import FixedPortal from "../fixedPortal";
+import styled, { css } from "react-emotion";
 import { Headline1 } from "../typography";
-import { Overlay } from "./components";
+import ModalHandler from "./modalHandler";
 
-const ModalContainer = styled("div")`
+const modalContainer = css`
   font-family: Quicksand;
   position: fixed;
   width: 70%;
@@ -45,16 +44,15 @@ interface Props {
 }
 
 const Modal = (props: Props) => (
-  <FixedPortal>
-    <Overlay onClick={props.close} />
-    <ModalContainer>
+  <ModalHandler open containerStyles={modalContainer} onCloseComplete={close}>
+    <React.Fragment>
       <ModalTitle>
         <Headline1>{props.title}</Headline1>
       </ModalTitle>
       <div>{props.content}</div>
       {!!props.footer && <ModalFooter>{props.footer}</ModalFooter>}
-    </ModalContainer>
-  </FixedPortal>
+    </React.Fragment>
+  </ModalHandler>
 );
 
 export default Modal;
