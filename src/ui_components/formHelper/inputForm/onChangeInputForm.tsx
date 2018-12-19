@@ -16,6 +16,7 @@ const OnChangeInputForm = (element: InputFormElement | TextAreaFormElement) => (
     ) : (
       <Input
         value={element.value}
+        type={element.isNumericType ? "number" : "text"}
         placeholder={element.placeholder}
         onChange={({ target: { value } }) => {
           element.edit(value);

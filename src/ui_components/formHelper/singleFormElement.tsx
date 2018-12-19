@@ -12,12 +12,13 @@ import { isFormArrayType, isInlineFormArrayElement } from "./services";
 
 interface Props {
   element: FormElement;
+  hasInnerLines?: boolean;
 }
 
-const SingleFormElementDisplay = ({ element }: Props) => (
+const SingleFormElementDisplay = ({ element, hasInnerLines }: Props) => (
   <FormContainer>
     <FormHeader header={element.header} subHeader={element.subHeader} />
-    <FormChild hasHeader={!!element.header}>
+    <FormChild hasHeader={!!element.header} hasInnerLines={hasInnerLines}>
       {((): JSX.Element => {
         const display = getElementDisplay(element);
         if (display) {

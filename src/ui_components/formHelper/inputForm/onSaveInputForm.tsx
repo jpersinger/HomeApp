@@ -25,7 +25,7 @@ const OnSaveInputForm = (element: InputFormElement | TextAreaFormElement) => {
               <FormTextArea />
             ) : (
               <Input
-                value={currentValue || value}
+                value={currentValue}
                 placeholder={placeholder}
                 onChange={({ target: { value } }) => {
                   setCurrentValue(value);

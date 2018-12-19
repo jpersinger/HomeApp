@@ -37,14 +37,19 @@ export const FormHeader = ({ header, subHeader }: Partial<BaseFormElement>) => (
   </React.Fragment>
 );
 
-export const FormChild = styled("div")<{ hasHeader: boolean }>(
-  ({ hasHeader }) => `
+export const FormChild = styled("div")<{
+  hasHeader: boolean;
+  hasInnerLines?: boolean;
+}>(
+  ({ hasHeader, hasInnerLines }) => `
     grid-column: ${hasHeader ? "" : "1/3"};
     height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    border-top: ${hasHeader ? `1px solid ${theme.colors.darkGray}` : ""}
+    border-top: ${
+      hasHeader && hasInnerLines ? `1px solid ${theme.colors.darkGray}` : ""
+    }
 `
 );
 
@@ -110,7 +115,7 @@ export const AddAndSave = ({
   return (
     <React.Fragment>
       {addEnabled ? (
-        <div>
+        <div style={{ display: "flex", paddingBottom: "1em" }}>
           {type === "input" ? (
             <Input
               value={newValue}

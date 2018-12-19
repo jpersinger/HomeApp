@@ -15,7 +15,7 @@ interface Props {
 
 const NewMonthlyExpenseModal = ({ toggleOpen, addMonthlyExpense }: Props) => {
   const [title, setTitle] = useState("");
-  const [cost, setCost] = useState(0);
+  const [cost, setCost] = useState("");
 
   const elements: FormElement[] = [
     {
@@ -32,10 +32,11 @@ const NewMonthlyExpenseModal = ({ toggleOpen, addMonthlyExpense }: Props) => {
       key: "expense_amount",
       header: "Cost",
       subHeader: "per month",
-      value: cost + "",
+      value: cost,
+      isNumericType: true,
       placeholder: "Cost",
       edit: (newCost: string) => {
-        setCost(parseFloat(newCost));
+        setCost(newCost);
       },
       editOnChange: true
     }
@@ -53,7 +54,7 @@ const NewMonthlyExpenseModal = ({ toggleOpen, addMonthlyExpense }: Props) => {
       footer={
         <Button
           onClick={() => {
-            addMonthlyExpense({ title, cost });
+            addMonthlyExpense({ title, cost: parseFloat(cost) });
             toggleOpen();
           }}
           disabled={isEmpty(title) || !cost}

@@ -10,6 +10,7 @@ export interface InputFormElement extends BaseFormElement {
   placeholder: string;
   edit: (newValue: string) => void;
   onDelete?: () => void;
+  isNumericType?: boolean;
 }
 
 export interface TextAreaFormElement extends InputFormElement {
@@ -52,4 +53,5 @@ export type FormElement =
 
 export interface Form {
   elements: FormElement[];
+  hasInnerLines?: boolean;
 }

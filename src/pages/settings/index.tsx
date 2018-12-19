@@ -38,7 +38,12 @@ const Settings = ({
       value: email,
       placeholder: "",
       edit: () => {},
-      delete: () => {}
+      delete:
+        index === 0
+          ? undefined
+          : () => {
+              deleteLinkedEmail(email);
+            }
     })
   );
 
@@ -78,7 +83,7 @@ const Settings = ({
 
   return (
     <div style={{ padding: "1em" }}>
-      <FormBuilder elements={elements} />
+      <FormBuilder hasInnerLines elements={elements} />
     </div>
   );
 };
