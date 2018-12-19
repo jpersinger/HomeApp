@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Button from "../../../../components/button";
-import theme from "../../../../components/theme";
-import { Paragraph1, Paragraph3 } from "../../../../components/typography";
 import { formatISOString } from "../../../../services";
 import { Message } from "../../../../services/home_services/home_services.definitions";
+import Button from "../../../../ui_components/button";
+import theme from "../../../../ui_components/theme";
+import { Paragraph1, Paragraph3 } from "../../../../ui_components/typography";
 import { MessageRowContainer } from "../components";
 import NewReply from "./newReply";
 

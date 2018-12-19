@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import Button from "../../../components/button";
-import { Input } from "../../../components/inputs";
-import Modal from "../../../components/modal";
 import { getUniqueId } from "../../../services";
 import { Income } from "../../../services/budget_services/budget.definitions";
 import { addIncome } from "../../../services/redux/actions/budget";
+import Button from "../../../ui_components/button";
+import { Input } from "../../../ui_components/inputs";
+import Modal from "../../../ui_components/modal";
 
 interface Props {
   toggleOpen: () => void;

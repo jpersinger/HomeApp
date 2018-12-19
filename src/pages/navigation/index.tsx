@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import IconButton from "../../components/icon/iconButton";
+import Food from "../../page_components/food";
 import { handleAuthentication } from "../../services";
 import { RootState } from "../../services/redux/reducers";
 import { SettingsState } from "../../services/redux/reducers/settings";
+import IconButton from "../../ui_components/icon/iconButton";
 import Budget from "../budget";
-import Food from "../food";
 import Home from "../home";
 import Settings from "../settings";
 import Login from "./authentication";
 import { PATH_MAP } from "./constants";
 import Drawer from "./drawer";
-
-const getLinkPath = (path: PATH_MAP) => "/" + path;
 
 const Navigation = ({ isAuthenticated }: SettingsState) => {
   const [open, toggleOpen] = useState(false);

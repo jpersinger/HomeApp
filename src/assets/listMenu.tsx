@@ -1,5 +1,5 @@
 import React from "react";
-import { IconProps } from "../components/icon";
+import { IconProps } from "../ui_components/icon";
 
 const ListMenu = ({ size, fill }: IconProps) => (
   <svg

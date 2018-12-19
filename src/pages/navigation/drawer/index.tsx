@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { animated, useSpring, useTrail } from "react-spring/hooks";
-import IconButton from "../../../components/icon/iconButton";
-import Overlay from "../../../components/overlay";
+import IconButton from "../../../ui_components/icon/iconButton";
+import Overlay from "../../../ui_components/overlay";
 import { PATH_MAP } from "../constants";
 import {
   CloseButtonContainer,

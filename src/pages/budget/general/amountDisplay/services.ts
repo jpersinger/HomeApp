@@ -1,4 +1,4 @@
-import theme from "../../../../components/theme";
+import theme from "../../../../ui_components/theme";
 
 export const getNumberColor = (isBankInfo: boolean, amount: number) => {
   if ((isBankInfo && !amount) || (!isBankInfo && !!amount)) {

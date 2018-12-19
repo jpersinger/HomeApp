@@ -2,8 +2,8 @@ import { cloneDeep } from "lodash";
 import moment from "moment";
 import React, { useLayoutEffect, useRef } from "react";
 import styled from "react-emotion";
-import Button from "../../components/button";
-import theme from "../../components/theme";
+import Button from "../../ui_components/button";
+import theme from "../../ui_components/theme";
 
 export const CircleContainer = styled("div")`
   display: flex;

@@ -1,5 +1,5 @@
 import { sendGetRequest, sendPostRequest } from ".";
-import { Recipe } from "../food_services/food.definitions";
+import { Recipe } from "../../page_components/food/food.definitions";
 import store from "../redux";
 import { setRecipes } from "../redux/actions/food";
 import { RECIPE_HASH, SERVER_URL } from "./constants";

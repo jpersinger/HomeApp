@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Headline2 } from "../../../../components/typography";
 import { getRemainingForMonth } from "../../../../services/budget_services";
 import { RootState } from "../../../../services/redux/reducers";
 import { BudgetState } from "../../../../services/redux/reducers/budget";
+import { Headline2 } from "../../../../ui_components/typography";
 import { RemainingContainer } from "./components";
 
 const Remaining = (budget: BudgetState) => {

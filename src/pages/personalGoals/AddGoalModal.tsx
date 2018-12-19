@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import Button from "../../components/button";
-import { TextArea } from "../../components/inputs";
-import Modal from "../../components/modal";
-import theme from "../../components/theme";
 import { addPersonalGoal } from "../../services/redux/actions/personalGoals";
+import Button from "../../ui_components/button";
+import { TextArea } from "../../ui_components/inputs";
+import Modal from "../../ui_components/modal";
+import theme from "../../ui_components/theme";
 
 interface Props {
   close: () => void;

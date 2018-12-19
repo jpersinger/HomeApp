@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { css } from "react-emotion";
 import { GoogleLogin } from "react-google-login-component";
 import { connect } from "react-redux";
-import Loading from "../../../components/animations/loading";
-import Modal from "../../../components/modal";
-import theme from "../../../components/theme";
 import { authenticateUser } from "../../../services/redux/actions/settings";
 import { getId } from "../../../services/server/home";
 import { GoogleUser } from "../../../services/settings_services/settings_services.definitions";
+import Loading from "../../../ui_components/animations/loading";
+import Modal from "../../../ui_components/modal";
+import theme from "../../../ui_components/theme";
 import { LoginModalContainer } from "./components";
 
 const loginClassName = css`

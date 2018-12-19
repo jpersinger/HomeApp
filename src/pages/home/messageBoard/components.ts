@@ -1,5 +1,5 @@
 import styled from "react-emotion";
-import theme from "../../../components/theme";
+import theme from "../../../ui_components/theme";
 
 export const MessageContainer = styled("div")`
   width: 80vw;

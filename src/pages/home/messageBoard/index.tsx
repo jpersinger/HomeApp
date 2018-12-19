@@ -1,11 +1,11 @@
 import { chain } from "lodash";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import IconButton from "../../../components/icon/iconButton";
-import theme from "../../../components/theme";
 import { sortByDate } from "../../../services";
 import { Message } from "../../../services/home_services/home_services.definitions";
 import { RootState } from "../../../services/redux/reducers";
+import IconButton from "../../../ui_components/icon/iconButton";
+import theme from "../../../ui_components/theme";
 import { AddMessageContainer, MessageContainer } from "./components";
 import NewReply from "./messageRow/newReply";
 import SingleMessageChain from "./singleMessageChain";

@@ -2,10 +2,6 @@ import { some } from "lodash";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import AddButton from "../../components/addButton";
-import CheckboxRow from "../../components/checkboxRow";
-import Icon from "../../components/icon";
-import theme from "../../components/theme";
 import { isDateToday } from "../../services";
 import { PersonalGoal } from "../../services/personal_goals_services/personal_goals_services.definitions";
 import {
@@ -13,6 +9,10 @@ import {
   setPersonalGoalCompleted
 } from "../../services/redux/actions/personalGoals";
 import { RootState } from "../../services/redux/reducers";
+import AddButton from "../../ui_components/addButton";
+import CheckboxRow from "../../ui_components/checkboxRow";
+import Icon from "../../ui_components/icon";
+import theme from "../../ui_components/theme";
 import AddGoalModal from "./AddGoalModal";
 import { CircleContainer, DateCircleList } from "./components";
 import {

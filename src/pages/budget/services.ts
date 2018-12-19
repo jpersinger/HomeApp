@@ -1,4 +1,4 @@
-import theme from "../../components/theme";
+import theme from "../../ui_components/theme";
 
 export const getPercentCompleteColor = (percentComplete: number): string => {
   if (percentComplete < 20) {

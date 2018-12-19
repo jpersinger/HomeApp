@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Paragraph1 } from "../../../components/typography";
 import { getRandomBibleVerse } from "../../../services/server/home";
+import { Paragraph1 } from "../../../ui_components/typography";
 import { VerseContainer } from "./components";
 
 const BibleVerse = () => {

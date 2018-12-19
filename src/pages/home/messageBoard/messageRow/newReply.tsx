@@ -1,14 +1,14 @@
 import moment from "moment";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import Button from "../../../../components/button";
-import { TextArea } from "../../../../components/inputs";
-import Modal from "../../../../components/modal";
-import theme from "../../../../components/theme";
-import { Paragraph1 } from "../../../../components/typography";
 import { getUniqueId } from "../../../../services";
 import { Message } from "../../../../services/home_services/home_services.definitions";
 import { addMessage } from "../../../../services/redux/actions/home";
+import Button from "../../../../ui_components/button";
+import { TextArea } from "../../../../ui_components/inputs";
+import Modal from "../../../../ui_components/modal";
+import theme from "../../../../ui_components/theme";
+import { Paragraph1 } from "../../../../ui_components/typography";
 
 interface Props {
   close: () => void;

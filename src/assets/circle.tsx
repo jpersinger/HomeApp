@@ -1,6 +1,6 @@
 import React from "react";
-import { IconProps } from "../components/icon";
-import theme from "../components/theme";
+import { IconProps } from "../ui_components/icon";
+import theme from "../ui_components/theme";
 
 const Circle = ({ size, fill, percentComplete = 100, text }: IconProps) => {
   const childSize = size - 10;

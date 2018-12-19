@@ -1,10 +1,10 @@
 import { orderBy } from "lodash";
 import React, { useState } from "react";
 import styled from "react-emotion";
-import Button from "../../components/button";
-import ConfirmationModal from "../../components/modal/confirmationModal";
-import theme from "../../components/theme";
-import { Headline1, Paragraph1 } from "../../components/typography";
+import Button from "../../ui_components/button";
+import ConfirmationModal from "../../ui_components/modal/confirmationModal";
+import theme from "../../ui_components/theme";
+import { Headline1, Paragraph1 } from "../../ui_components/typography";
 import { getPercentCompleteColor } from "./services";
 
 export const FullBudgetContainer = styled("div")`
