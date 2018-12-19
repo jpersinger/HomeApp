@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { MonthlyExpense } from "../../../services/budget_services/budget.definitions";
 import { deleteMonthlyExpense } from "../../../services/redux/actions/budget";
 import { RootState } from "../../../services/redux/reducers";
+import { MonthlyExpense } from "../budget.definitions";
 import { BudgetSection } from "../components";
 import NewMonthlyExpenseModal from "./newMonthlyExpenseModal";
 

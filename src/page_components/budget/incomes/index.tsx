@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { Income } from "../../../services/budget_services/budget.definitions";
 import { deleteIncome } from "../../../services/redux/actions/budget";
 import { RootState } from "../../../services/redux/reducers";
+import { Income } from "../budget.definitions";
 import { BudgetSection } from "../components";
 import NewIncomeModal from "./newIncomeModal";
 

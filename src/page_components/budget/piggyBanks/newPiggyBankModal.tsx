@@ -2,11 +2,12 @@ import { isEmpty } from "lodash";
 import moment from "moment";
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { PiggyBank } from "../../../services/budget_services/budget.definitions";
 import { addPiggyBank } from "../../../services/redux/actions/budget";
 import Button from "../../../ui_components/button";
-import { Input } from "../../../ui_components/inputs";
+import FormBuilder from "../../../ui_components/formHelper";
+import { FormElement } from "../../../ui_components/formHelper/form.definitions";
 import Modal from "../../../ui_components/modal";
+import { PiggyBank } from "../budget.definitions";
 
 interface Props {
   toggleOpen: () => void;
@@ -19,12 +20,58 @@ const NewPiggyBankModal = ({ toggleOpen, addPiggyBank }: Props) => {
   const [goalTotal, setGoalTotal] = useState(0);
   const [currentTotal, setCurrentTotal] = useState(0);
 
+  const elements: FormElement[] = [
+    {
+      key: "piggy_bank_title",
+      header: "Title",
+      placeholder: "Title",
+      value: title,
+      edit: newTitle => {
+        setTitle(newTitle);
+      },
+      editOnChange: true
+    },
+    {
+      key: "piggy_bank_amount_per_month",
+      header: "Amount",
+      subHeader: "per month",
+      placeholder: "Amount",
+      value: amountPerMonth + "",
+      edit: amountPerMonth => {
+        setAmountPerMonth(parseFloat(amountPerMonth));
+      },
+      editOnChange: true
+    },
+    {
+      key: "piggy_bank_goal_amount",
+      header: "Goal",
+      placeholder: "Goal",
+      value: goalTotal + "",
+      edit: newGoalAmount => {
+        setGoalTotal(parseFloat(newGoalAmount));
+      },
+      editOnChange: true
+    },
+    {
+      key: "piggy_bank_current",
+      header: "Current Amount",
+      subHeader: "towards goal",
+      placeholder: "Current Amount",
+      value: currentTotal + "",
+      edit: newCurrentTotal => {
+        setCurrentTotal(parseFloat(newCurrentTotal));
+      },
+      editOnChange: true
+    }
+  ];
+
   return (
     <Modal
       title="New Piggy Bank"
       content={
-        <div>
-          <Input
+        <div style={{ padding: "1em" }}>
+          <FormBuilder elements={elements} />
+          {/* <Input
             placeholder="Title"
             value={title}
             onChange={event => {
@@ -57,7 +104,7 @@ const NewPiggyBankModal = ({ toggleOpen, addPiggyBank }: Props) => {
             onChange={event => {
               setCurrentTotal(parseInt(event.target.value));
             }}
-          />
+          /> */}
         </div>
       }
       close={toggleOpen}

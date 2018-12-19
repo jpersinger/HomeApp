@@ -5,7 +5,7 @@ import {
   Income,
   MonthlyExpense,
   PiggyBank
-} from "../../budget_services/budget.definitions";
+} from "../../../page_components/budget/budget.definitions";
 import {
   sendDeleteIncome,
   sendDeleteMonthlyExpense,

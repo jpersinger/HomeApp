@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { PiggyBank } from "../../../services/budget_services/budget.definitions";
 import { deletePiggyBank } from "../../../services/redux/actions/budget";
 import { RootState } from "../../../services/redux/reducers";
+import { PiggyBank } from "../budget.definitions";
 import { BudgetSection } from "../components";
 import NewPiggyBankModal from "./newPiggyBankModal";
 

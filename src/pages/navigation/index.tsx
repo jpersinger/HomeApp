@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Budget from "../../page_components/budget";
 import Food from "../../page_components/food";
 import { handleAuthentication } from "../../services";
 import { RootState } from "../../services/redux/reducers";
 import { SettingsState } from "../../services/redux/reducers/settings";
 import IconButton from "../../ui_components/icon/iconButton";
-import Budget from "../budget";
 import Home from "../home";
 import Settings from "../settings";
 import Login from "./authentication";
