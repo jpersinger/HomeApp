@@ -54,8 +54,30 @@ const DropDown = ({
     [selectedItem]
   );
 
+  const clickingstuff = (event: any) => {
+    const el = document.getElementById("dropdown_container");
+
+    if (
+      event.target !== el &&
+      el &&
+      !el.contains(event.target) &&
+      listVisible
+    ) {
+      closeDropdown();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", event => {
+      clickingstuff(event);
+    });
+    return document.removeEventListener("click", event => {
+      clickingstuff(event);
+    });
+  });
+
   return (
-    <DropdownContainer listVisible={listVisible} onBlur={closeDropdown}>
+    <DropdownContainer listVisible={listVisible} id="dropdown_container">
       <DropdownInputContainer onClick={openDropdown}>
         <Input
           placeholder={placeholder}
@@ -75,6 +97,7 @@ const DropDown = ({
       >
         {items.map((item, index) => (
           <Button
+            key={item}
             onClick={() => {
               selectItem(item);
             }}
