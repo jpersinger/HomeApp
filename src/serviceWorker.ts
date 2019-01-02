@@ -25,6 +25,10 @@ type Config = {
   onUpdate?: (registration: ServiceWorkerRegistration) => void;
 };
 
+self.addEventListener('fetch', () => {
+  console.log('fetch in self');
+});
+
 export function register(config?: Config) {
   window.addEventListener('fetch', () => {});
   console.log(process.env.NODE_ENV, 'serviceWorker' in navigator);
