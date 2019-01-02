@@ -39,7 +39,6 @@ const Drawer = ({ open, toggleOpen }: Props) => {
     window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault();
       console.log('e', e);
-      alert(e);
       setGotInstall(true);
     });
   }, []);
