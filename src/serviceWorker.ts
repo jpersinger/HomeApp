@@ -31,6 +31,9 @@ self.addEventListener('fetch', () => {
 
 export function register(config?: Config) {
   window.addEventListener('fetch', () => {});
+  self.addEventListener('fetch', () => {
+    console.log('fetch in self 2');
+  });
   console.log(process.env.NODE_ENV, 'serviceWorker' in navigator);
   // if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
   if ('serviceWorker' in navigator) {
