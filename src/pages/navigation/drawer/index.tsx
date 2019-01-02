@@ -35,6 +35,7 @@ const Drawer = ({ open, toggleOpen }: Props) => {
   const [gotInstall, setGotInstall] = useState(false);
 
   useEffect(() => {
+    console.log('adding listener');
     window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault();
       console.log('e', e);
