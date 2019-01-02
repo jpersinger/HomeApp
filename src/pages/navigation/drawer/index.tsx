@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { animated, useSpring, useTrail } from 'react-spring/hooks';
 import IconButton from '../../../ui_components/icon/iconButton';
 import Overlay from '../../../ui_components/overlay';
@@ -32,11 +32,14 @@ const Drawer = ({ open, toggleOpen }: Props) => {
     () => FADE_ANIMATIONS.initial
   );
 
+  const [gotInstall, setGotInstall] = useState(false);
+
   useEffect(() => {
     window.addEventListener('beforeinstallprompt', e => {
       e.preventDefault();
       console.log('e', e);
       alert(e);
+      setGotInstall(true);
     });
   }, []);
 
@@ -57,6 +60,7 @@ const Drawer = ({ open, toggleOpen }: Props) => {
 
   return (
     <React.Fragment>
+      {gotInstall && <div>Got install prompt</div>}
       <animated.div
         className={navContainer}
         style={{ ...navProps, position: 'absolute', zIndex: 2 }}
