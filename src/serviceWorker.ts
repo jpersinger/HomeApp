@@ -65,12 +65,10 @@ export function register(config?: Config) {
 }
 
 function registerValidSW(swUrl: string, config?: Config) {
-  fetch(swUrl).then(e => {
-    console.log('fetched', e);
-  });
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+      console.log('registration', registration);
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
