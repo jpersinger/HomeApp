@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import { animated, useSpring, useTrail } from "react-spring/hooks";
-import IconButton from "../../../ui_components/icon/iconButton";
-import Overlay from "../../../ui_components/overlay";
-import { PATH_MAP } from "../constants";
+import React, { useEffect } from 'react';
+import { animated, useSpring, useTrail } from 'react-spring/hooks';
+import IconButton from '../../../ui_components/icon/iconButton';
+import Overlay from '../../../ui_components/overlay';
+import { PATH_MAP } from '../constants';
 import {
   CloseButtonContainer,
   FADE_ANIMATIONS,
   ListStyle,
   navContainer,
   NAV_ANIMATIONS
-} from "./components";
-import LinkItem from "./linkItem";
+} from './components';
+import LinkItem from './linkItem';
 
 interface Props {
   open: boolean;
@@ -32,6 +32,14 @@ const Drawer = ({ open, toggleOpen }: Props) => {
     () => FADE_ANIMATIONS.initial
   );
 
+  useEffect(() => {
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      console.log('e', e);
+      alert(e);
+    });
+  }, []);
+
   useEffect(
     () => {
       if (open) {
@@ -51,13 +59,13 @@ const Drawer = ({ open, toggleOpen }: Props) => {
     <React.Fragment>
       <animated.div
         className={navContainer}
-        style={{ ...navProps, position: "absolute", zIndex: 2 }}
+        style={{ ...navProps, position: 'absolute', zIndex: 2 }}
       >
         <nav>
           <ListStyle>
             <CloseButtonContainer>
               <IconButton
-                name="close"
+                name='close'
                 size={30}
                 onClick={() => {
                   toggleOpen(false);
