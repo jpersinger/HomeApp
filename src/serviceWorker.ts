@@ -26,6 +26,7 @@ type Config = {
 };
 
 export function register(config?: Config) {
+  window.addEventListener('fetch', () => {});
   console.log(process.env.NODE_ENV, 'serviceWorker' in navigator);
   // if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
   if ('serviceWorker' in navigator) {
@@ -65,10 +66,12 @@ export function register(config?: Config) {
 }
 
 function registerValidSW(swUrl: string, config?: Config) {
+  fetch(swUrl);
   navigator.serviceWorker
-    .register(swUrl)
+    .register(swUrl, { scope: '.' })
     .then(registration => {
       console.log('registration', registration);
+      registration.addEventListener('fetch', () => {});
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
