@@ -66,12 +66,15 @@ export function register(config?: Config) {
 }
 
 function registerValidSW(swUrl: string, config?: Config) {
+  console.log('fetching');
   fetch(swUrl);
   navigator.serviceWorker
     .register(swUrl, { scope: '.' })
     .then(registration => {
       console.log('registration', registration);
-      registration.addEventListener('fetch', () => {});
+      registration.addEventListener('fetch', () => {
+        console.log('fetch');
+      });
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
